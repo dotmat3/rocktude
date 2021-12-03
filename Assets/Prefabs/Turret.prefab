@@ -251,7 +251,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9029522776793630253}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2.1202042, z: 2.5}
@@ -290,4 +290,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshResolution: 0.1
   viewMeshFilter: {fileID: 3383551661609948374}
+  defaultViewMaterial: {fileID: 2100000, guid: 33a1dafd5109da64cb80576675a568f7, type: 2}
+  invalidViewMaterial: {fileID: 2100000, guid: 17bfa8edd66e9e946a8744528d91c626, type: 2}
   debug: 0

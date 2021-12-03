@@ -6,8 +6,9 @@ public class FieldOfView : MonoBehaviour {
 
     [Range(0, 1)]
     public float meshResolution;
-
     public MeshFilter viewMeshFilter;
+    public Material defaultViewMaterial;
+    public Material invalidViewMaterial;
     public bool debug = false;
 
     private bool show = false;
@@ -23,6 +24,9 @@ public class FieldOfView : MonoBehaviour {
             name = "View Mesh"
         };
         viewMeshFilter.mesh = viewMesh;
+
+        MeshRenderer viewMeshRenderer = viewMeshFilter.gameObject.GetComponent<MeshRenderer>();
+        viewMeshRenderer.material = defaultViewMaterial;
     }
 
     void LateUpdate() {
@@ -86,11 +90,19 @@ public class FieldOfView : MonoBehaviour {
     public void Show() {
         show = true;
         viewMeshFilter.gameObject.SetActive(true);
+
+        MeshRenderer viewMeshRenderer = viewMeshFilter.gameObject.GetComponent<MeshRenderer>();
+        viewMeshRenderer.material = defaultViewMaterial;
     }
 
     public void Hide() {
         show = false;
         viewMeshFilter.gameObject.SetActive(false);
+    }
+
+    public void Colliding() {
+        MeshRenderer viewMeshRenderer = viewMeshFilter.gameObject.GetComponent<MeshRenderer>();
+        viewMeshRenderer.material = invalidViewMaterial;
     }
 
     struct ViewCastInfo {

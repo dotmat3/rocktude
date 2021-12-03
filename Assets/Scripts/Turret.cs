@@ -12,6 +12,7 @@ public class Turret : MonoBehaviour {
     }
 
     private bool active = false;
+    private int collisionCounter = 0;
 
     public GameObject cannon;
 
@@ -114,14 +115,14 @@ public class Turret : MonoBehaviour {
     }
 
     public void ChangeStatus(TurretStatus status) {
-        currentStatus = TurretStatus.Selected;
+        currentStatus = status;
 
         switch (status) {
             case TurretStatus.Selected:
                 GetComponent<FieldOfView>().Show();
                 break;
             case TurretStatus.Colliding:
-                // GetComponent<FieldOfView>().Colliding();
+                GetComponent<FieldOfView>().Colliding();
                 break;
             case TurretStatus.Idle:
                 GetComponent<FieldOfView>().Hide();
@@ -131,5 +132,20 @@ public class Turret : MonoBehaviour {
 
     public TurretStatus getCurrentStatus() {
         return currentStatus;
+    }
+
+    private void OnTriggerEnter(Collider collider) {
+        if (currentStatus == TurretStatus.Idle) return;
+
+        collisionCounter++;
+        ChangeStatus(TurretStatus.Colliding);
+    }
+
+    private void OnTriggerExit(Collider collider) {
+        if (currentStatus == TurretStatus.Idle) return;
+
+        collisionCounter--;
+        if (collisionCounter == 0)
+            ChangeStatus(TurretStatus.Selected);
     }
 }

@@ -154,6 +154,7 @@ PlayerSettings:
   androidMaxAspectRatio: 3
   applicationIdentifier:
     Android: com.DefaultCompany.TowerDefense
+    Standalone: com.DefaultCompany.TowerDefense
   buildNumber:
     Standalone: 0
     iPhone: 0

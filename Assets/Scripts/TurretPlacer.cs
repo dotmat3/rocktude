@@ -16,46 +16,44 @@ public class TurretPlacer : MonoBehaviour {
 
     public float collisionRadius = 1f;
 
-    private int turretsMask;
+    private int terrainMask;
 
     public Button buyButton;
+    public Text buyText;
 
-    private bool isBuying;
+    private bool buying;
 
     private void Start() {
         networkController = gameController.GetComponent<NetworkController>();
 
-        turretsMask = LayerMask.GetMask("Turret");
+        terrainMask = LayerMask.GetMask("Terrain");
 
         buyButton.onClick.AddListener(onBuyClick);
 
-        isBuying = false;
+        buying = false;
     }
 
     void Update() {
-        if (isBuying) {
+        if (buying) {
             HandleNewTurret();
 
             if (currentTurret != null) {
                     FollowMouse();
-                    // CheckTurretCollisions();
                     HandlePlacement();
             }
         }
     }
 
     void onBuyClick() {
-        if (isBuying) {
-            isBuying = false;
-            Text btnText = buyButton.GetComponent<Text>();
-            btnText.text = "$" + turretCost;
+        if (buying) {
+            buying = false;
+            buyText.text = "$" + turretCost;
         } else {
 
             if (gameController.money < turretCost) return;
 
-            isBuying = true;
-            Text btnText = buyButton.GetComponent<Text>();
-            btnText.text = "Buying";
+            buying = true;
+            buyText.text = "Buying";
         }
     }
 
@@ -73,27 +71,33 @@ public class TurretPlacer : MonoBehaviour {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~turretsMask)) {
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, terrainMask)) {
             currentTurret.transform.position = hit.point;
             // currentTurret.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
         }
     }
 
     void HandlePlacement() {
-        if (Input.GetMouseButtonUp(0)) {
-            networkController.SendEvent(new PlaceTurretEvent(0, currentTurret.transform.position));
+        if (Input.GetMouseButtonUp(0))
+            if (currentTurret.getCurrentStatus() == Turret.TurretStatus.Colliding) {
+                Destroy(currentTurret.gameObject);
+                currentTurret = null;
 
-            currentTurret.Activate();
-            currentTurret.ChangeStatus(Turret.TurretStatus.Idle);
-            currentTurret = null;
-            
-            isBuying = false;
+                buying = false;
+                buyText.text = "$" + turretCost;
+            } else {
+                networkController.SendEvent(new PlaceTurretEvent(0, currentTurret.transform.position));
 
-            Text btnText = buyButton.GetComponent<Text>();
-            btnText.text = "$" + turretCost;
+                currentTurret.Activate();
+                currentTurret.ChangeStatus(Turret.TurretStatus.Idle);
+                currentTurret = null;
 
-            gameController.UpdateMoney(gameController.money - turretCost);
-        }
+                buying = false;
+
+                buyText.text = "$" + turretCost;
+
+                gameController.UpdateMoney(gameController.money - turretCost);
+            }
     }
 
     public Turret PlaceTurret(int index, Vector3 position) {
@@ -109,22 +113,7 @@ public class TurretPlacer : MonoBehaviour {
         return gameObject;
     }
 
-    void CheckTurretCollisions() {
-        Vector3 turretPos = currentTurret.transform.position;
-
-        var layerMask = 1 << turretsMask;
-        Collider[] hitColliders = Physics.OverlapSphere(turretPos, collisionRadius, layerMask);
-
-        string str = "";
-        foreach (Collider collider in hitColliders) {
-            str += collider.name + " ";
-        }
-
-        Debug.Log("Colliding with " + str);
-
-        if (hitColliders.Length != 0)
-            currentTurret.ChangeStatus(Turret.TurretStatus.Colliding);
-        else
-            currentTurret.ChangeStatus(Turret.TurretStatus.Selected);
+    public bool isBuying() {
+        return buying;
     }
 }

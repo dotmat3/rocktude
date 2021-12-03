@@ -14,6 +14,7 @@ public class TurretSelector : MonoBehaviour {
     }
 
     void Update() {
+
         if (Input.GetMouseButtonDown(0)) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
