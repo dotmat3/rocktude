@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using PathCreation;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -34,6 +35,10 @@ public class GameController : MonoBehaviour {
         UpdateMoney(startMoney);
         UpdateLives(startLives);
         UpdateRounds();
+    }
+
+    void Update() {
+        if (Input.GetKeyUp(KeyCode.Escape)) SceneManager.LoadScene(1);
     }
 
     public void UpdateMoney(int amount) {

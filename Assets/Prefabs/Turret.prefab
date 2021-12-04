@@ -276,6 +276,22 @@ MonoBehaviour:
   timeBetweenShooting: 0.5
   attackPoint: {fileID: 9032338974884441253}
   shootParticles: {fileID: 9190152936415182191}
+--- !u!114 &2549357710202492975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9029522776793630253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78da2625c38ace4e88cfc545917c2d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 100
+  sellValue: 50
+  description: A nice description made by me with my keyboard.
+  nextUpgrade: {fileID: 0}
 --- !u!114 &7417028245106365877
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class TurretPlacer : MonoBehaviour {
     private int buyingTurretIndex = -1;
     private int turretCost = -1;
 
-    private void Start() {
+    void Start() {
         networkController = gameController.GetComponent<NetworkController>();
 
         terrainMask = LayerMask.GetMask("Terrain");
@@ -64,7 +64,7 @@ public class TurretPlacer : MonoBehaviour {
         buttons[turretIndex].GetComponentInChildren<Text>().text = "cancel";
     }
 
-    void UpdateDrawerButtons() { 
+    void UpdateDrawerButtons() {
         for (int i = 0; i < buttons.Count; i++) {
             int cost = 100 * (i + 1);
             buttons[i].interactable = cost <= gameController.money;
@@ -75,9 +75,8 @@ public class TurretPlacer : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit)) {
+            if (Physics.Raycast(ray, out RaycastHit hit))
                 currentTurret = PlaceTurret(buyingTurretIndex, hit.point);
-            }
         }
     }
 
