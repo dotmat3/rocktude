@@ -8,12 +8,15 @@ public class WaveController : MonoBehaviour {
     public Transform spawnPoint;
     public List<Enemy> enemies;
     public Enemy boss;
+    public StartButtonBehaviour startButton;
 
     private GameController gameController;
 
     private int enemiesCurrentRound = 0;
     private int numberEnemiesToSpawn;
     private int enemyIndex = 0;
+
+    private bool autoStartRound = false;
 
     void Start() {
         gameController = FindObjectOfType<GameController>();
@@ -48,6 +51,9 @@ public class WaveController : MonoBehaviour {
 
         gameController.round++;
         gameController.UpdateRounds();
+
+        if (autoStartRound) StartRound();
+        else startButton.ShowStartRound();
     }
 
     public void StartRound() {
@@ -67,6 +73,8 @@ public class WaveController : MonoBehaviour {
             float interval = 1f - (.1f * (round % 10));
             InvokeRepeating("SpawnEnemy", interval, interval);
         }
-
     }
+
+    public void EnableAutoRound() { autoStartRound = true; }
+    public void DisableAutoRound() { autoStartRound = false; }
 }
