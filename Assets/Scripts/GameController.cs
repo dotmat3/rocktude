@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using PathCreation;
+using System;
 
 public class GameController : MonoBehaviour {
 
@@ -27,6 +28,8 @@ public class GameController : MonoBehaviour {
     public Text gameOverText;
     public Text victoryText;
 
+    private readonly List<Action> onMoneyUpdate = new List<Action>();
+
     void Start() {
         UpdateMoney(startMoney);
         UpdateLives(startLives);
@@ -37,6 +40,8 @@ public class GameController : MonoBehaviour {
         money = amount;
 
         moneyText.text = "$" + money.ToString();
+
+        onMoneyUpdate.ForEach(action => action.Invoke());
     }
 
     public void UpdateLives(int amount) {
@@ -55,11 +60,9 @@ public class GameController : MonoBehaviour {
             roundText.text = "round\nboss";
     }
 
-    public void Victory() {
-        victoryText.gameObject.SetActive(true);
-    }
+    public void Victory() => victoryText.gameObject.SetActive(true);
 
-    public void Defeat() {
-        gameOverText.gameObject.SetActive(true);
-    }
+    public void Defeat() => gameOverText.gameObject.SetActive(true);
+
+    public void AddOnMoneyUpdate(Action action) => onMoneyUpdate.Add(action);
 }

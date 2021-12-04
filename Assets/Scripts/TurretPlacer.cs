@@ -2,35 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class TurretPlacer : MonoBehaviour {
 
     public Camera cam;
-    public Turret turret;
-    public int turretCost = 100;
     public GameController gameController;
     public List<Turret> turrets;
+    public List<Button> buttons;
+
+    public Selectable drawer;
 
     private Turret currentTurret;
     private NetworkController networkController;
-
-    public float collisionRadius = 1f;
-
     private int terrainMask;
 
-    public Button buyButton;
-    public Text buyText;
-
-    private bool buying;
+    private bool buying = false;
+    private int buyingTurretIndex = -1;
+    private int turretCost = -1;
 
     private void Start() {
         networkController = gameController.GetComponent<NetworkController>();
 
         terrainMask = LayerMask.GetMask("Terrain");
 
-        buyButton.onClick.AddListener(onBuyClick);
-
-        buying = false;
+        gameController.AddOnMoneyUpdate(UpdateDrawerButtons);
     }
 
     void Update() {
@@ -44,34 +40,51 @@ public class TurretPlacer : MonoBehaviour {
         }
     }
 
-    void onBuyClick() {
-        if (buying) {
-            buying = false;
-            buyText.text = "$" + turretCost;
-        } else {
+    public void OnBuyClick(int turretIndex) {
+        // If the user selects the same turret
+        if (buying && buyingTurretIndex == turretIndex) {
+            CancelBuying();
+            return;
+        }
 
-            if (gameController.money < turretCost) return;
+        // If the user clicks another turret while buying another one
+        if (buying)
+            CancelBuying();
 
-            buying = true;
-            buyText.text = "Buying";
+        buyingTurretIndex = turretIndex;
+        turretCost = 100 * (turretIndex + 1);
+
+        // If the user doesn't have enough money to buy the turret
+        if (gameController.money < turretCost) {
+            CancelBuying();
+            return;
+        }
+
+        buying = true;
+        buttons[turretIndex].GetComponentInChildren<Text>().text = "cancel";
+    }
+
+    void UpdateDrawerButtons() { 
+        for (int i = 0; i < buttons.Count; i++) {
+            int cost = 100 * (i + 1);
+            buttons[i].interactable = cost <= gameController.money;
         }
     }
 
     void HandleNewTurret() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
-                currentTurret = PlaceTurret(turret, hit.point);
+            if (Physics.Raycast(ray, out RaycastHit hit)) {
+                currentTurret = PlaceTurret(buyingTurretIndex, hit.point);
+            }
         }
     }
 
     void FollowMouse() {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, terrainMask)) {
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, terrainMask)) {
             currentTurret.transform.position = hit.point;
             // currentTurret.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
         }
@@ -80,24 +93,35 @@ public class TurretPlacer : MonoBehaviour {
     void HandlePlacement() {
         if (Input.GetMouseButtonUp(0))
             if (currentTurret.getCurrentStatus() == Turret.TurretStatus.Colliding) {
-                Destroy(currentTurret.gameObject);
-                currentTurret = null;
-
-                buying = false;
-                buyText.text = "$" + turretCost;
+                CancelBuying();
             } else {
                 networkController.SendEvent(new PlaceTurretEvent(0, currentTurret.transform.position));
 
                 currentTurret.Activate();
                 currentTurret.ChangeStatus(Turret.TurretStatus.Idle);
+                // Remove the current turret otherwise the CancelBuying method will destroy it
                 currentTurret = null;
 
-                buying = false;
-
-                buyText.text = "$" + turretCost;
-
                 gameController.UpdateMoney(gameController.money - turretCost);
+
+                CancelBuying();
             }
+    }
+
+    public void CancelBuying() {
+        if (buyingTurretIndex == -1) return;
+
+        if (currentTurret) {
+            Destroy(currentTurret.gameObject);
+            currentTurret = null;
+        }
+
+        buttons[buyingTurretIndex].GetComponentInChildren<Text>().text = "$" + turretCost;
+
+        buyingTurretIndex = -1;
+        turretCost = -1;
+
+        buying = false;
     }
 
     public Turret PlaceTurret(int index, Vector3 position) {
@@ -113,7 +137,7 @@ public class TurretPlacer : MonoBehaviour {
         return gameObject;
     }
 
-    public bool isBuying() {
+    public bool IsBuying() {
         return buying;
     }
 }
