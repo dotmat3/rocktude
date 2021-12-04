@@ -26,7 +26,7 @@ public class TurretPlacer : MonoBehaviour {
 
         terrainMask = LayerMask.GetMask("Terrain");
 
-        gameController.AddOnMoneyUpdate(UpdateDrawerButtons);
+        gameController.AddOnMoneyUpdate(UpdateTurretsButtons);
     }
 
     void Update() {
@@ -64,7 +64,7 @@ public class TurretPlacer : MonoBehaviour {
         buttons[turretIndex].GetComponentInChildren<Text>().text = "cancel";
     }
 
-    void UpdateDrawerButtons() {
+    void UpdateTurretsButtons() {
         for (int i = 0; i < buttons.Count; i++) {
             int cost = 100 * (i + 1);
             buttons[i].interactable = cost <= gameController.money;

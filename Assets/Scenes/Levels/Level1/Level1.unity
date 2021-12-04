@@ -3557,6 +3557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4041ef98f348c746912cfaf8216da45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 579490850}
   description: {fileID: 1478104109}
   upgradeButton: {fileID: 748554650}
   sellButton: {fileID: 207878936}

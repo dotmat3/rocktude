@@ -5,28 +5,51 @@ using UnityEngine.UI;
 
 public class UpgradeController : MonoBehaviour {
 
+    public GameController gameController;
+
     public Text description;
     public Button upgradeButton;
     public Button sellButton;
 
     public GameObject turretsDrawer;
 
-    private GameController gameController;
+    private TurretSelector turretSelector;
 
     private Turret selectedTurret;
     private NextUpgradeInfo info;
 
     void Start() {
-        gameController = FindObjectOfType<GameController>();
+        turretSelector = FindObjectOfType<TurretSelector>();
+
+        gameController.AddOnMoneyUpdate(UpdateUpgradeButtons);
+    }
+
+    private void UpdateUpgradeButtons() {
+        if (selectedTurret && info)
+            upgradeButton.interactable = gameController.money >= info.cost;
     }
 
     public void UpdateView(Turret turret) {
         selectedTurret = turret;
         info = selectedTurret.GetComponent<NextUpgradeInfo>();
 
-        description.text = info.description;
-        upgradeButton.GetComponentInChildren<Text>().text = "upgrade\n$" + info.cost;
-        sellButton.GetComponentInChildren<Text>().text = "sell\n$" + info.sellValue;
+        Text upgradeBtnText = upgradeButton.GetComponentInChildren<Text>();
+        Text sellBtnText = sellButton.GetComponentInChildren<Text>();
+
+        if (info) {
+            description.text = info.description;
+
+            upgradeBtnText.text = "upgrade\n$" + info.cost;
+
+            UpdateUpgradeButtons();
+        } else {
+            description.text = "Max upgrade reached!";
+            upgradeBtnText.text = "Max";
+
+            upgradeButton.interactable = false;
+        }
+
+        sellBtnText.text = "sell\n$" + turret.sellValue;
     }
 
     public void Show() {
@@ -42,13 +65,22 @@ public class UpgradeController : MonoBehaviour {
     public void SellTurret() {
         Destroy(selectedTurret.gameObject);
 
-        gameController.UpdateMoney(gameController.money + info.sellValue);
+        gameController.UpdateMoney(gameController.money + selectedTurret.sellValue);
 
         gameObject.SetActive(false);
         turretsDrawer.SetActive(true);
     }
 
     public void UpgradeTurret() {
-        // TODO...
+        gameController.UpdateMoney(gameController.money - info.cost);
+
+        Transform prevTransform = selectedTurret.transform;
+
+        Destroy(selectedTurret.gameObject);
+
+        Turret newTurret = Instantiate(info.nextUpgrade, prevTransform.position, prevTransform.rotation);
+        newTurret.Activate();
+
+        turretSelector.OnTurretSelected(newTurret);
     }
 }

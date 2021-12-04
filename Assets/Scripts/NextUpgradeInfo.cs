@@ -5,8 +5,7 @@ using UnityEngine;
 public class NextUpgradeInfo : MonoBehaviour {
 
     public int cost;
-    public int sellValue;
     [TextArea]
     public string description;
-    public GameObject nextUpgrade;
+    public Turret nextUpgrade;
 }

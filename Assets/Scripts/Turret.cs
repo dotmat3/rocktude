@@ -15,6 +15,7 @@ public class Turret : MonoBehaviour {
     private int collisionCounter = 0;
 
     public GameObject cannon;
+    public int sellValue;
 
     [Header("Shooting")]
     public GameObject bullet;

@@ -34,7 +34,7 @@ public class TurretSelector : MonoBehaviour {
         }
     }
 
-    void OnTurretSelected(Turret turret) {
+    public void OnTurretSelected(Turret turret) {
         if (selectedTurret)
             selectedTurret.ChangeStatus(Turret.TurretStatus.Idle);
         
@@ -45,7 +45,7 @@ public class TurretSelector : MonoBehaviour {
         upgradeController.Show();
     }
 
-    void OnClearSelection() {
+    public void OnClearSelection() {
         if (selectedTurret) {
             selectedTurret.ChangeStatus(Turret.TurretStatus.Idle);
             selectedTurret = null;
