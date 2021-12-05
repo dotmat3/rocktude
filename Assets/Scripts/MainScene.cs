@@ -8,6 +8,10 @@ public class MainScene : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
+    public void MultiPlayer() {
+        SceneManager.LoadScene(2);
+    }
+
     public void Quit() {
         Application.Quit();
     }

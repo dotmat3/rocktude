@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.48532772, g: 0.5764861, b: 0.68228227, a: 1}
+  m_IndirectSpecularColor: {r: 0.48537147, g: 0.5765983, b: 0.68217826, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -842,7 +842,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 570287832}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1731601831}
+        m_TargetAssemblyTypeName: MainScene, Assembly-CSharp
+        m_MethodName: MultiPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &570287832
 MonoBehaviour:
   m_ObjectHideFlags: 0
