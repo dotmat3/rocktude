@@ -127,3 +127,5 @@ MonoBehaviour:
   endOfPathInstruction: 2
   speed: 1
   health: 10
+  impactEffect: {fileID: 214270318505080964, guid: b3655805f67d02b4aa97093db01db87e,
+    type: 3}

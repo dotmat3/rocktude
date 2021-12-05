@@ -35,9 +35,7 @@ public class Enemy : MonoBehaviour {
             distanceTravelled += speed * Time.deltaTime;
 
             // Move the enemy along the path
-            Vector3 position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-            position.y += height;
-            transform.position = position;
+            transform.position = GetPositionAtDistance(distanceTravelled);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 
             if (transform.position == lastPoint) {
@@ -47,6 +45,12 @@ public class Enemy : MonoBehaviour {
                 Destroy(gameObject);
             }
         }
+    }
+
+    public Vector3 GetPositionAtDistance(float distance) {
+        Vector3 position = pathCreator.path.GetPointAtDistance(distance, endOfPathInstruction);
+        position.y += height;
+        return position;
     }
 
     public void TakeDamage(int amount) {
@@ -61,4 +65,6 @@ public class Enemy : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    public float GetDistanceTravelled() => distanceTravelled;
 }

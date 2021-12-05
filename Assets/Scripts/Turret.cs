@@ -45,33 +45,76 @@ public class Turret : MonoBehaviour {
     void Update() {
         if (!active) return;
 
-        // Find nearest enemy
-        GameObject enemy = FindNearestEnemy();
-        if (!enemy) return;
+        if (readyToShoot) {
+            Vector3? predictedEnemyPos = FindFirstEnemyPosition();
+            if (!predictedEnemyPos.HasValue) return;
 
-        // Rotate towards the enemy
-        Vector3 enemyPos = enemy.transform.position;
-        Vector3 forward = enemyPos - cannon.transform.position;
-        cannon.transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
+            // Rotate towards the predicted enemy position
+            Vector3 forward = predictedEnemyPos.Value - cannon.transform.position;
+            Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
+            cannon.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, rotation.eulerAngles.z);
 
-        // Shoot when mouse clicked
-        if (readyToShoot)
-            Shoot(enemy);
+            Shoot(predictedEnemyPos.Value);
+        }
     }
 
+    Vector3? FindFirstEnemyPosition() {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, enemiesMask);
+
+        float maximumTravelledDistance = -Mathf.Infinity;
+        Vector3? firstEnemyPos = null;
+
+        foreach (Collider collider in hitColliders) {
+            Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+            Vector3 predictedPos = PredictEnemyPosition(enemy);
+
+            Vector3 direction = (predictedPos - transform.position).normalized;
+
+            // If the enemy is behind an obstacle, ignore it
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, radius, obstaclesMask)) {
+                float distancePredictedPos = Vector3.Distance(predictedPos, transform.position);
+                
+                // Ignore the enemy if the obstacle distance is smaller than the enemy distance
+                if (hit.distance < distancePredictedPos)
+                    continue;
+            }
+
+            Debug.DrawLine(transform.position, transform.position + direction * radius, Color.red);
+            
+            float travelledDistance = enemy.GetDistanceTravelled();
+            if (travelledDistance > maximumTravelledDistance) {
+                maximumTravelledDistance = travelledDistance;
+                firstEnemyPos = predictedPos;
+            }
+        }
+
+        return firstEnemyPos;
+    }
+
+    Vector3 PredictEnemyPosition(Enemy enemy) {
+        float enemyDistance = Vector3.Distance(enemy.transform.position, transform.position);
+        float projectileTravelTime = enemyDistance / shootForce;
+        float predictedDistance = enemy.GetDistanceTravelled() + enemy.speed * projectileTravelTime;
+        Vector3 predictedEnemyPos = enemy.GetPositionAtDistance(predictedDistance);
+
+        return predictedEnemyPos;
+    }
+
+    #region Not used
     GameObject FindNearestEnemy() {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, enemiesMask);
 
         float minimumDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        RaycastHit hit;
         foreach (Collider collider in hitColliders) {
 
             Vector3 direction = (collider.transform.position - transform.position).normalized;
 
             // If the enemy is behind an obstacle, ignore it
-            if (Physics.Raycast(transform.position, direction, out hit, radius, obstaclesMask))
+            // If we are going to use this, remember the case when an enemy is in front of an obstacle,
+            // the ray is going to hit the obstacle behind and therefore not shoot to the enemy
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, radius, obstaclesMask))
                 continue;
                
             Debug.DrawLine(transform.position, transform.position + direction * radius, Color.red);
@@ -86,12 +129,12 @@ public class Turret : MonoBehaviour {
 
         return nearestEnemy;
     }
+    #endregion
 
-    public void Shoot(GameObject enemy) {
+    public void Shoot(Vector3 predictedPos) {
         readyToShoot = false;
 
-        Vector3 enemyPos = enemy.transform.position;
-        Vector3 direction = (enemyPos - attackPoint.position).normalized;
+        Vector3 direction = (predictedPos - attackPoint.position).normalized;
 
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
         currentBullet.transform.forward = direction;
