@@ -17,13 +17,22 @@ public class CameraFeedController : MonoBehaviour {
     private Texture2D croppedTexture;
     private IBarcodeReader barcodeReader;
 
-    private void PermissionCallbacks_PermissionDeniedAndDontAskAgain(string permissionName) {
-        // TODO...
-    }
+    IEnumerator Start() {
+        // Request camera permission
+        if (Application.platform == RuntimePlatform.Android) {
+            if (!Permission.HasUserAuthorizedPermission(Permission.Camera)) {
+                Permission.RequestUserPermission(Permission.Camera);
+                yield return new WaitUntil(() => Permission.HasUserAuthorizedPermission(Permission.Camera));
+            }
+        }
+        else {
+            yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
+            if (!Application.HasUserAuthorization(UserAuthorization.WebCam))
+                yield break;
+        }
 
-    private void PermissionCallbacks_PermissionGranted(string permissionName) {
-        width = (int) showImage.rectTransform.rect.width;
-        height = (int) showImage.rectTransform.rect.height;
+        width = (int)showImage.rectTransform.rect.width;
+        height = (int)showImage.rectTransform.rect.height;
 
         camTexture = new WebCamTexture(null, 1920, 1080);
         if (camTexture != null) {
@@ -37,18 +46,6 @@ public class CameraFeedController : MonoBehaviour {
             barcodeReader = new BarcodeReader();
             InvokeRepeating("ReadQR", 0, 0.5f);
         }
-    }
-
-    private void PermissionCallbacks_PermissionDenied(string permissionName) {
-        // TODO...
-    }
-
-    void Start() {
-        var callbacks = new PermissionCallbacks();
-        callbacks.PermissionDenied += PermissionCallbacks_PermissionDenied;
-        callbacks.PermissionGranted += PermissionCallbacks_PermissionGranted;
-        callbacks.PermissionDeniedAndDontAskAgain += PermissionCallbacks_PermissionDeniedAndDontAskAgain;
-        Permission.RequestUserPermission(Permission.Camera, callbacks);
     }
 
     void ReadQR() { 
