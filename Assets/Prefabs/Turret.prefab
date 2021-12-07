@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannon: {fileID: 9028764986278202177}
+  cost: 100
   sellValue: 50
   bullet: {fileID: 1099767012462384358, guid: a3d2a92cc5a893d49a3022aa83c19a50, type: 3}
   radius: 5

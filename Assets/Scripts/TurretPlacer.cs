@@ -1,17 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+[Serializable]
+public abstract class Purchasable : MonoBehaviour {
+    public abstract int getCost();
+}
+
 public class TurretPlacer : MonoBehaviour {
 
     public Camera cam;
     public GameController gameController;
-    public List<Turret> turrets;
+    [SerializeField]
+    public List<Purchasable> purchasables;
     public List<Button> buttons;
-
-    public Selectable drawer;
 
     private Turret currentTurret;
     private NetworkController networkController;
@@ -26,7 +31,7 @@ public class TurretPlacer : MonoBehaviour {
 
         terrainMask = LayerMask.GetMask("Terrain");
 
-        gameController.AddOnMoneyUpdate(UpdateTurretsButtons);
+        gameController.AddOnMoneyUpdate(UpdatePurchasableButtons);
     }
 
     void Update() {
@@ -52,7 +57,7 @@ public class TurretPlacer : MonoBehaviour {
             CancelBuying();
 
         buyingTurretIndex = turretIndex;
-        turretCost = 100 * (turretIndex + 1);
+        turretCost = purchasables[turretIndex].getCost();
 
         // If the user doesn't have enough money to buy the turret
         if (gameController.money < turretCost) {
@@ -64,9 +69,9 @@ public class TurretPlacer : MonoBehaviour {
         buttons[turretIndex].GetComponentInChildren<Text>().text = "cancel";
     }
 
-    void UpdateTurretsButtons() {
+    void UpdatePurchasableButtons() {
         for (int i = 0; i < buttons.Count; i++) {
-            int cost = 100 * (i + 1);
+            int cost = purchasables[i].getCost();
             buttons[i].interactable = cost <= gameController.money;
         }
     }
@@ -124,7 +129,7 @@ public class TurretPlacer : MonoBehaviour {
     }
 
     public Turret PlaceTurret(int index, Vector3 position) {
-        Turret gameObject = turrets[index];
+        Turret gameObject = (Turret) purchasables[index];
 
         return PlaceTurret(gameObject, position);
     }

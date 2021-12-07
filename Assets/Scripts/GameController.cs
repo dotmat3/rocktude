@@ -9,6 +9,10 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
 
     public PathCreator pathLevel;
+    public Missile missile;
+    public Transform missileSpawnPosition;
+
+    public GameObject drawer;
 
     [Header("Round")]
     public int round = 1;
@@ -54,7 +58,7 @@ public class GameController : MonoBehaviour {
 
         livesText.text = lives.ToString();
 
-        if (amount == 0)
+        if (amount <= 0)
             Defeat();
     }
 
@@ -70,4 +74,16 @@ public class GameController : MonoBehaviour {
     public void Defeat() => gameOverText.gameObject.SetActive(true);
 
     public void AddOnMoneyUpdate(Action action) => onMoneyUpdate.Add(action);
+
+    public void SpawnMissile() {
+        Instantiate(missile, missileSpawnPosition.position, missile.transform.rotation);
+
+        UpdateMoney(money - missile.getCost());
+
+        ToggleDrawer();
+    }
+
+    public void ToggleDrawer() {
+        drawer.SetActive(!drawer.activeSelf);
+    }
 }

@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour {
     public void TakeDamage(int amount) {
         health -= amount;
 
-        if (health == 0) {
+        if (health <= 0) {
             // The enemy was destroyed by a turret
             GameObject effect = Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(effect, 2f);

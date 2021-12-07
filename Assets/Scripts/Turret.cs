@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class Turret : MonoBehaviour {
+public class Turret : Purchasable {
 
     public enum TurretStatus {
         Idle,
@@ -15,6 +15,7 @@ public class Turret : MonoBehaviour {
     private int collisionCounter = 0;
 
     public GameObject cannon;
+    public int cost;
     public int sellValue;
 
     [Header("Shooting")]
@@ -173,7 +174,7 @@ public class Turret : MonoBehaviour {
                 break;
         }
     }
-
+    
     public TurretStatus getCurrentStatus() {
         return currentStatus;
     }
@@ -191,5 +192,9 @@ public class Turret : MonoBehaviour {
         collisionCounter--;
         if (collisionCounter == 0)
             ChangeStatus(TurretStatus.Selected);
+    }
+
+    public override int getCost() {
+        return cost;
     }
 }
