@@ -15,7 +15,7 @@ public class BulletController : MonoBehaviour {
             Enemy enemy = collider.GetComponent<Enemy>();
             enemy.TakeDamage(1);
 
-            gameController.UpdateMoney(gameController.money + enemy.health);
+            gameController.UpdateMoney(gameController.money + 1);
         }
 
         Destroy(gameObject);
