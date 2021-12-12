@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "855129623962",
+    "project_id": "nicetowerdefense",
+    "storage_bucket": "nicetowerdefense.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855129623962:android:b5bb9141f50b51edafbe23",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.TowerDefense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855129623962-klds3ljikb6645rmb28q6ude1o758p4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA_FpdXezpsvP2BeYO-Vn5i-Eze_ALvJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855129623962-klds3ljikb6645rmb28q6ude1o758p4v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
