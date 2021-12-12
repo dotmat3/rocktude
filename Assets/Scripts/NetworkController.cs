@@ -9,11 +9,12 @@ public class NetworkController : MonoBehaviour {
     public static char MSG_DELIMITER = '\n';
     public static int BUFFER_SIZE = 1024;
 
+    public string serverAddress = "127.0.0.1";
+    public int serverPort = 2004;
+
     private TcpClient socketConnection;
     private Thread clientReceiveThread;
     private List<SocketEvent> receivedEvents = new List<SocketEvent>();
-    public string serverAddress = "127.0.0.1";
-    public int serverPort = 2004;
 
     void Start() {
         ConnectToTcpServer();
@@ -24,9 +25,7 @@ public class NetworkController : MonoBehaviour {
             clientReceiveThread = new Thread(new ThreadStart(ListenForData));
             clientReceiveThread.IsBackground = true;
             clientReceiveThread.Start();
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             Debug.Log("On client connect exception " + e);
         }
     }
@@ -79,9 +78,9 @@ public class NetworkController : MonoBehaviour {
     }
 
     private void SendSocketMessage(string clientMessage) {
-        if (socketConnection == null) {
+        if (socketConnection == null)
             return;
-        }
+
         try {
             NetworkStream stream = socketConnection.GetStream();
             if (stream.CanWrite) {
@@ -89,8 +88,7 @@ public class NetworkController : MonoBehaviour {
                 byte[] clientMessageAsByteArray = Encoding.ASCII.GetBytes(clientMessage);
                 stream.Write(clientMessageAsByteArray, 0, clientMessageAsByteArray.Length);
             }
-        }
-        catch (SocketException socketException) {
+        } catch (SocketException socketException) {
             Debug.Log("Socket exception: " + socketException);
         }
     }

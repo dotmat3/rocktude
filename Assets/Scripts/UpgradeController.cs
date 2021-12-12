@@ -63,6 +63,9 @@ public class UpgradeController : MonoBehaviour {
     }
 
     public void SellTurret() {
+        if (gameController.GetGameStatus() != GameStatus.IDLE)
+            return;
+
         Destroy(selectedTurret.gameObject);
 
         gameController.UpdateMoney(gameController.money + selectedTurret.sellValue);
@@ -72,6 +75,9 @@ public class UpgradeController : MonoBehaviour {
     }
 
     public void UpgradeTurret() {
+        if (gameController.GetGameStatus() != GameStatus.IDLE)
+            return;
+        
         gameController.UpdateMoney(gameController.money - info.cost);
 
         Transform prevTransform = selectedTurret.transform;

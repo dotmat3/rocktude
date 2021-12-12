@@ -48,6 +48,9 @@ public class WaveController : MonoBehaviour {
         if (gameController.round == 41 && gameController.lives > 0)
             gameController.Victory();
 
+        if (gameController.GetGameStatus() != GameStatus.IDLE)
+            return;
+
         gameController.round++;
         gameController.UpdateRounds();
 
@@ -74,6 +77,6 @@ public class WaveController : MonoBehaviour {
         }
     }
 
-    public void EnableAutoRound() { autoStartRound = true; }
-    public void DisableAutoRound() { autoStartRound = false; }
+    public void EnableAutoRound() => autoStartRound = true;
+    public void DisableAutoRound() => autoStartRound = false;
 }

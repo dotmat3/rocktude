@@ -80,6 +80,7 @@ MonoBehaviour:
   cost: 500
   radius: 4
   damage: 2
+  speed: 50
   missileImpactEffect: {fileID: 7083821594506842035, guid: c7fb25bb5ac726c4faa2998347ba6abd,
     type: 3}
 --- !u!1001 &8486942436862316016

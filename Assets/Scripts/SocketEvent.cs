@@ -29,3 +29,19 @@ public class PlaceTurretEvent : SocketEvent {
         turret.ChangeStatus(Turret.TurretStatus.Idle);
     }
 }
+
+public class UpdateMissileEvent : SocketEvent {
+    public Vector3 position;
+    public Quaternion rotation;
+
+    public UpdateMissileEvent(Vector3 position, Quaternion rotation) {
+        this.position = position;
+        this.rotation = rotation;
+    }
+
+    public override void ExecuteHandler() {
+        Missile missile = Object.FindObjectOfType<Missile>();
+        missile.transform.position = position;
+        missile.transform.rotation = rotation;
+    }
+}

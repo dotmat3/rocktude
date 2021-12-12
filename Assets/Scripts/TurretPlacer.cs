@@ -46,6 +46,10 @@ public class TurretPlacer : MonoBehaviour {
     }
 
     public void OnBuyClick(int turretIndex) {
+        // Check if the game is not ended
+        if (gameController.GetGameStatus() != GameStatus.IDLE)
+            return;
+
         // If the user selects the same turret
         if (buying && buyingTurretIndex == turretIndex) {
             CancelBuying();

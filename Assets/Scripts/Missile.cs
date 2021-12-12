@@ -9,24 +9,28 @@ public class Missile : Purchasable {
     public int cost;
     public int radius;
     public int damage;
+    public float speed = 50f;
     public GameObject missileImpactEffect;
 
     private GameController gameController;
     private int enemyMask;
+    private Vector3 forward;
 
     void Start() {
-        GetComponent<Rigidbody>().AddForce(Vector3.down * force);
         gameController = FindObjectOfType<GameController>();
 
         enemyMask = LayerMask.GetMask("Enemy");
     }
 
     void Update() {
-        float x = (float) Math.Round(Input.acceleration.x, 2);
-        float y = (float) Math.Round(Input.acceleration.y, 2);
+        float x = Input.acceleration.x;
+        float y = Input.acceleration.y;
 
-        Vector3 direction = new Vector3(x, 0f, -y);
-        transform.Translate(direction * Time.deltaTime * 10f);
+        forward = new Vector3(-x, -1f, -y);
+
+        Vector3 direction = new Vector3(8f * forward.x, 4f * forward.y, 4f * forward.z);
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+        GetComponent<Rigidbody>().velocity = direction * speed * Time.deltaTime;
     }
 
     void OnCollisionEnter(Collision collision) {
