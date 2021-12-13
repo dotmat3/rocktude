@@ -1908,7 +1908,6 @@ GameObject:
   - component: {fileID: 579490850}
   - component: {fileID: 579490851}
   - component: {fileID: 579490849}
-  - component: {fileID: 579490852}
   m_Layer: 0
   m_Name: WorldController
   m_TagString: Untagged
@@ -2013,20 +2012,6 @@ MonoBehaviour:
   - {fileID: 4218611715543721684, guid: d084bc0d93886b445b8adbbf7b553cbf, type: 3}
   boss: {fileID: 246900267, guid: 873ce52063653df4fafb4095653465fa, type: 3}
   startButton: {fileID: 1586070192}
---- !u!114 &579490852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579490846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25076388b40c0cb4db1b3c1e7776dfa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serverAddress: skylion.zapto.org
-  serverPort: 2042
 --- !u!1 &640409129
 GameObject:
   m_ObjectHideFlags: 0

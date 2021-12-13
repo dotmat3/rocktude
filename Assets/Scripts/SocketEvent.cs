@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SocketEvent {
@@ -13,6 +14,38 @@ public class SocketEvent {
     public virtual void ExecuteHandler() { Debug.Log("Event base handler called"); }
 }
 
+public class JoinRoomEvent : SocketEvent {
+    public string code;
+    public string userId;
+    public string username;
+
+    public JoinRoomEvent(string code, string userId, string username) {
+        this.code = code;
+        this.userId = userId;
+        this.username = username;
+    }
+
+    public override void ExecuteHandler() {
+        GameObject.FindObjectOfType<MultiplayerController>().OnPlayerJoin(this);
+    }
+}
+
+public class LeaveRoomEvent : SocketEvent {
+    public string code;
+    public string userId;
+    public string username;
+
+    public LeaveRoomEvent(string code, string userId, string username) {
+        this.code = code;
+        this.userId = userId;
+        this.username = username;
+    }
+
+    public override void ExecuteHandler() {
+        GameObject.FindObjectOfType<MultiplayerController>().OnPlayerLeave(this);
+    }
+}
+
 public class PlaceTurretEvent : SocketEvent {
     public int index;
     public Vector3 position;
@@ -23,7 +56,7 @@ public class PlaceTurretEvent : SocketEvent {
     }
 
     public override void ExecuteHandler() {
-        TurretPlacer turretPlacer = Object.FindObjectOfType<TurretPlacer>();
+        TurretPlacer turretPlacer = GameObject.FindObjectOfType<TurretPlacer>();
         Turret turret = turretPlacer.PlaceTurret(index, position);
         turret.Activate();
         turret.ChangeStatus(Turret.TurretStatus.Idle);
@@ -40,7 +73,7 @@ public class UpdateMissileEvent : SocketEvent {
     }
 
     public override void ExecuteHandler() {
-        Missile missile = Object.FindObjectOfType<Missile>();
+        Missile missile = GameObject.FindObjectOfType<Missile>();
         missile.transform.position = position;
         missile.transform.rotation = rotation;
     }

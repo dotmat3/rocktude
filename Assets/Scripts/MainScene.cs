@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Firebase;
@@ -9,7 +8,6 @@ using Firebase.Auth;
 using Firebase.Extensions;
 using UnityEngine.UI;
 using UnityEngine.Networking;
-using System.Threading;
 
 public class MainScene : MonoBehaviour {
 

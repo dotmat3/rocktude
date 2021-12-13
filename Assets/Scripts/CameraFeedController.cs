@@ -9,6 +9,8 @@ using UnityEngine.Android;
 public class CameraFeedController : MonoBehaviour {
 
     public RawImage showImage;
+    public GameObject cameraFeedUI;
+    public MultiplayerController multiplayerController;
 
     private WebCamTexture camTexture;
     private int width;
@@ -17,7 +19,11 @@ public class CameraFeedController : MonoBehaviour {
     private Texture2D croppedTexture;
     private IBarcodeReader barcodeReader;
 
-    IEnumerator Start() {
+    void OnEnable() {
+        StartCoroutine("StartCamera");
+    }
+
+    IEnumerator StartCamera() {
         // Request camera permission
         if (Application.platform == RuntimePlatform.Android) {
             if (!Permission.HasUserAuthorizedPermission(Permission.Camera)) {
@@ -31,8 +37,8 @@ public class CameraFeedController : MonoBehaviour {
                 yield break;
         }
 
-        width = (int)showImage.rectTransform.rect.width;
-        height = (int)showImage.rectTransform.rect.height;
+        width = (int) showImage.rectTransform.rect.width;
+        height = (int) showImage.rectTransform.rect.height;
 
         camTexture = new WebCamTexture(null, 1920, 1080);
         if (camTexture != null) {
@@ -48,17 +54,26 @@ public class CameraFeedController : MonoBehaviour {
         }
     }
 
+    public void Stop() {
+        CancelInvoke();
+        camTexture.Stop();
+    }
+
     void ReadQR() { 
         try {
             Result result = barcodeReader.Decode(croppedTexture.GetPixels32(), width, height);
-            if (result != null)
-                Debug.Log("Result: " + result.Text);
+            if (result != null) {
+                Stop();
+                cameraFeedUI.SetActive(false);
+                RoomInfo roomInfo = JsonUtility.FromJson<RoomInfo>(result.Text);
+                multiplayerController.ShowWaitingRoom(roomInfo);
+            }
         }
         catch (Exception ex) { Debug.LogWarning(ex.Message); }
     }
 
     void Update() {
-        if (data != null) {
+        if (camTexture != null && camTexture.isPlaying && data != null) {
             // Crop the camera frame
             Color[] cropped = camTexture.GetPixels((camTexture.width - width) / 2, (camTexture.height - height) / 2, width, height);
             croppedTexture.SetPixels(cropped);

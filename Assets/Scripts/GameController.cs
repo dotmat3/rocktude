@@ -42,17 +42,23 @@ public class GameController : MonoBehaviour {
     private GameStatus gameStatus = GameStatus.IDLE;
 
     private readonly List<Action> onMoneyUpdate = new List<Action>();
+    private NetworkController networkController;
 
     void Start() {
+        networkController = NetworkController.DefaultInstance;
+
         UpdateMoney(startMoney);
         UpdateLives(startLives);
         UpdateRounds();
     }
 
     void Update() {
+        networkController.HandleEvents();
+
         if (Input.GetKeyUp(KeyCode.Escape)) SceneManager.LoadScene(1);
     }
 
+    #region Update UI
     public void UpdateMoney(int amount) {
         money = amount;
 
@@ -76,6 +82,7 @@ public class GameController : MonoBehaviour {
         else
             roundText.text = "round\nboss";
     }
+    #endregion
 
     public void Victory() {
         victoryText.gameObject.SetActive(true);
