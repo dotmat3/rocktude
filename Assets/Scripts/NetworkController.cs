@@ -47,6 +47,7 @@ public class NetworkController {
         Debug.Log("Socket disconnected");
         clientReceiveThread.Abort();
         socketConnection.Close();
+        socketConnection = null;
     }
 
     public void HandleEvents() {
@@ -108,10 +109,10 @@ public class NetworkController {
     }
     
     private void SendSocketMessage(string clientMessage) {
-        Debug.Log("Sending socket message: " + clientMessage);
         if (socketConnection == null) {
             return;
         }
+        Debug.Log("Sending socket message: " + clientMessage);
 
         try {
             NetworkStream stream = socketConnection.GetStream();

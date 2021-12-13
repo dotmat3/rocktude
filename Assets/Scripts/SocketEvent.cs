@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class SocketEvent {
@@ -14,6 +13,7 @@ public class SocketEvent {
     public virtual void ExecuteHandler() { Debug.Log("Event base handler called"); }
 }
 
+#region Room Events
 public class JoinRoomEvent : SocketEvent {
     public string code;
     public string userId;
@@ -26,7 +26,7 @@ public class JoinRoomEvent : SocketEvent {
     }
 
     public override void ExecuteHandler() {
-        GameObject.FindObjectOfType<MultiplayerController>().OnPlayerJoin(this);
+        GameObject.FindObjectOfType<RoomController>().OnPlayerJoin(this);
     }
 }
 
@@ -42,10 +42,19 @@ public class LeaveRoomEvent : SocketEvent {
     }
 
     public override void ExecuteHandler() {
-        GameObject.FindObjectOfType<MultiplayerController>().OnPlayerLeave(this);
+        GameObject.FindObjectOfType<RoomController>().OnPlayerLeave(this);
     }
 }
 
+public class StartGameEvent : SocketEvent {
+
+    public override void ExecuteHandler() {
+        GameObject.FindObjectOfType<RoomController>().StartGame(this);
+    }
+}
+#endregion
+
+#region Game Events
 public class PlaceTurretEvent : SocketEvent {
     public int index;
     public Vector3 position;
@@ -60,6 +69,13 @@ public class PlaceTurretEvent : SocketEvent {
         Turret turret = turretPlacer.PlaceTurret(index, position);
         turret.Activate();
         turret.ChangeStatus(Turret.TurretStatus.Idle);
+    }
+}
+
+public class StartButtonEvent : SocketEvent {
+
+    public override void ExecuteHandler() {
+        GameObject.FindObjectOfType<StartButtonBehaviour>().HandleButtonClick();
     }
 }
 
@@ -78,3 +94,4 @@ public class UpdateMissileEvent : SocketEvent {
         missile.transform.rotation = rotation;
     }
 }
+#endregion

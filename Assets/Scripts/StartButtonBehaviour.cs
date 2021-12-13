@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartButtonBehaviour : MonoBehaviour
-{
+public class StartButtonBehaviour : MonoBehaviour {
 
     enum StartButtonStatus { 
         Start, AutoRound, AutoRoundEnabled
@@ -19,6 +18,12 @@ public class StartButtonBehaviour : MonoBehaviour
     }
 
     public void OnClick() {
+        MultiplayerController.DefaultInstance.StartButton();
+
+        HandleButtonClick();
+    }
+
+    public void HandleButtonClick() {
         if (status == StartButtonStatus.Start) StartRound();
         else if (status == StartButtonStatus.AutoRound) EnableAutoRound();
         else if (status == StartButtonStatus.AutoRoundEnabled) DisableAutoRound();

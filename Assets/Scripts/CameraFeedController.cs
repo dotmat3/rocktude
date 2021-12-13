@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ZXing;
@@ -10,7 +9,7 @@ public class CameraFeedController : MonoBehaviour {
 
     public RawImage showImage;
     public GameObject cameraFeedUI;
-    public MultiplayerController multiplayerController;
+    public RoomController roomController;
 
     private WebCamTexture camTexture;
     private int width;
@@ -66,7 +65,7 @@ public class CameraFeedController : MonoBehaviour {
                 Stop();
                 cameraFeedUI.SetActive(false);
                 RoomInfo roomInfo = JsonUtility.FromJson<RoomInfo>(result.Text);
-                multiplayerController.ShowWaitingRoom(roomInfo);
+                roomController.ShowWaitingRoom(roomInfo);
             }
         }
         catch (Exception ex) { Debug.LogWarning(ex.Message); }

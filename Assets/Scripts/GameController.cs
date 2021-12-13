@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour {
     public Transform missileSpawnPosition;
 
     public GameObject drawer;
+    public GameObject playersUI;
 
     [Header("Round")]
     public int round = 1;
@@ -42,10 +43,17 @@ public class GameController : MonoBehaviour {
     private GameStatus gameStatus = GameStatus.IDLE;
 
     private readonly List<Action> onMoneyUpdate = new List<Action>();
-    private NetworkController networkController;
+    private MultiplayerController multiplayerController;
 
     void Start() {
-        networkController = NetworkController.DefaultInstance;
+        multiplayerController = MultiplayerController.DefaultInstance;
+
+        if (IsMultiplayer()) {
+            RoomInfo? roomInfo = multiplayerController.GetRoomInfo();
+            var players = multiplayerController.GetPlayers();
+            playersUI.GetComponent<Text>().text = $"players\n{players.Count}/{roomInfo.Value.maxPlayers}";
+            playersUI.SetActive(true);
+        }
 
         UpdateMoney(startMoney);
         UpdateLives(startLives);
@@ -53,9 +61,15 @@ public class GameController : MonoBehaviour {
     }
 
     void Update() {
-        networkController.HandleEvents();
+        multiplayerController.Update();
 
-        if (Input.GetKeyUp(KeyCode.Escape)) SceneManager.LoadScene(1);
+        if (Input.GetKeyUp(KeyCode.Escape)) {
+            if (IsMultiplayer()) {
+                multiplayerController.Exit();
+                SceneManager.LoadScene(2);
+            } else
+                SceneManager.LoadScene(1);
+        }
     }
 
     #region Update UI
@@ -113,5 +127,9 @@ public class GameController : MonoBehaviour {
 
     public GameStatus GetGameStatus() {
         return gameStatus;
+    }
+
+    public bool IsMultiplayer() {
+        return multiplayerController.GetRoomInfo().HasValue;
     }
 }

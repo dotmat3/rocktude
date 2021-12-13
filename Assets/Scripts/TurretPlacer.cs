@@ -18,16 +18,17 @@ public class TurretPlacer : MonoBehaviour {
     public List<Purchasable> purchasables;
     public List<Button> buttons;
 
+    private MultiplayerController multiplayerController;
     private Turret currentTurret;
-    private NetworkController networkController;
     private int terrainMask;
 
     private bool buying = false;
     private int buyingTurretIndex = -1;
     private int turretCost = -1;
 
+
     void Start() {
-        networkController = gameController.GetComponent<NetworkController>();
+        multiplayerController = MultiplayerController.DefaultInstance;
 
         terrainMask = LayerMask.GetMask("Terrain");
 
@@ -103,7 +104,7 @@ public class TurretPlacer : MonoBehaviour {
             if (currentTurret.getCurrentStatus() == Turret.TurretStatus.Colliding) {
                 CancelBuying();
             } else {
-                networkController.SendEvent(new PlaceTurretEvent(0, currentTurret.transform.position));
+                multiplayerController.PlaceTurret(buyingTurretIndex, currentTurret.transform.position);
 
                 currentTurret.Activate();
                 currentTurret.ChangeStatus(Turret.TurretStatus.Idle);
