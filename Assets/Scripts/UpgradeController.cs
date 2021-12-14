@@ -65,15 +65,24 @@ public class UpgradeController : MonoBehaviour {
         turretsDrawer.SetActive(true);
     }
 
-    public void SellTurret() {
+    public void SellSelectedTurret() {
+        SellTurret(selectedTurret);
+
+        multiplayerController.SellTurret(selectedTurret);
+
+        gameController.UpdateMoney(gameController.money + selectedTurret.sellValue);
+        Hide();
+    }
+
+    public void SellTurret(string index) {
+        SellTurret(gameController.GetTurret(index));
+    }
+
+    public void SellTurret(Turret turret) {
         if (gameController.GetGameStatus() != GameStatus.IDLE)
             return;
 
-        Destroy(selectedTurret.gameObject);
-
-        gameController.UpdateMoney(gameController.money + selectedTurret.sellValue);
-
-        Hide();
+        Destroy(turret.gameObject);
     }
 
     public void UpgradeSelectedTurret() {

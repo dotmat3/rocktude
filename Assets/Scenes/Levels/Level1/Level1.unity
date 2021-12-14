@@ -721,7 +721,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 579490852}
         m_TargetAssemblyTypeName: UpgradeController, Assembly-CSharp
-        m_MethodName: SellTurret
+        m_MethodName: SellSelectedTurret
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -993,7 +993,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 579490850}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: SpawnMissile
+        m_MethodName: BuyMissile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

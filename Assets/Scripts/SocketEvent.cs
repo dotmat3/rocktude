@@ -93,10 +93,32 @@ public class UpgradeTurretEvent : SocketEvent {
     }
 }
 
+public class SellEvent : SocketEvent {
+    public string index;
+
+    public SellEvent(string index) {
+        this.index = index;
+    }
+
+    public override void ExecuteHandler() {
+        UpgradeController upgradeController = GameObject.FindObjectOfType<UpgradeController>();
+        upgradeController.SellTurret(index);
+    }
+}
+
 public class StartButtonEvent : SocketEvent {
 
     public override void ExecuteHandler() {
         GameObject.FindObjectOfType<StartButtonBehaviour>().HandleButtonClick();
+    }
+}
+
+public class MissileEvent : SocketEvent {
+
+    public override void ExecuteHandler() {
+        GameController gameController = GameObject.FindObjectOfType<GameController>();
+        Missile missile = gameController.SpawnMissile();
+        missile.Deactivate();
     }
 }
 
@@ -111,8 +133,10 @@ public class UpdateMissileEvent : SocketEvent {
 
     public override void ExecuteHandler() {
         Missile missile = GameObject.FindObjectOfType<Missile>();
-        missile.transform.position = position;
-        missile.transform.rotation = rotation;
+        if (missile) {
+            missile.transform.position = position;
+            missile.transform.rotation = rotation;
+        }
     }
 }
 #endregion

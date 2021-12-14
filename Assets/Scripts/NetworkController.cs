@@ -112,7 +112,6 @@ public class NetworkController {
         if (socketConnection == null) {
             return;
         }
-        Debug.Log("Sending socket message: " + clientMessage);
 
         try {
             NetworkStream stream = socketConnection.GetStream();

@@ -13,24 +13,45 @@ public class Missile : Purchasable {
     public GameObject missileImpactEffect;
 
     private GameController gameController;
+    private MultiplayerController multiplayerController;
+
     private int enemyMask;
     private Vector3 forward;
+    private bool active = true;
 
     void Start() {
         gameController = FindObjectOfType<GameController>();
+        multiplayerController = MultiplayerController.DefaultInstance;
 
         enemyMask = LayerMask.GetMask("Enemy");
+
+        if (active)
+            InvokeRepeating("SendUpdate", 0.02f, 0.02f);
     }
 
     void Update() {
-        float x = Input.acceleration.x;
-        float y = Input.acceleration.y;
+        if (active) {
+            float x = Input.acceleration.x;
+            float y = Input.acceleration.y;
 
-        forward = new Vector3(-x, -1f, -y);
+            forward = new Vector3(-x, -1f, -y);
 
-        Vector3 direction = new Vector3(8f * forward.x, 4f * forward.y, 4f * forward.z);
-        transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
-        GetComponent<Rigidbody>().velocity = direction * speed * Time.deltaTime;
+            Vector3 direction = new Vector3(8f * forward.x, 4f * forward.y, 4f * forward.z);
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+            GetComponent<Rigidbody>().velocity = direction * speed * Time.deltaTime;
+        }
+    }
+
+    public void Activate() {
+        active = true;
+    }
+
+    public void Deactivate() {
+        active = false;
+    }
+
+    void SendUpdate() {
+        multiplayerController.UpdateMissile(this);
     }
 
     void OnCollisionEnter(Collision collision) {
@@ -44,7 +65,7 @@ public class Missile : Purchasable {
             enemy.TakeDamage(damage);
         }
 
-        gameController.ToggleDrawer();
+        gameController.ShowDrawer();
         Destroy(gameObject);
     }
 

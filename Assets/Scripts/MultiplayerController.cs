@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,6 +56,18 @@ public class MultiplayerController {
 
     public void UpgradeTurret(Turret turret) {
         networkController.SendEvent(new UpgradeTurretEvent(turret.GetIdentifier()));
+    }
+
+    public void SellTurret(Turret turret) {
+        networkController.SendEvent(new SellEvent(turret.GetIdentifier()));
+    }
+
+    public void SpawnMissile() {
+        networkController.SendEvent(new MissileEvent());
+    }
+
+    public void UpdateMissile(Missile missile) {
+        networkController.SendEvent(new UpdateMissileEvent(missile.transform.position, missile.transform.rotation));
     }
 
     public void StartButton() {

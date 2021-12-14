@@ -112,19 +112,29 @@ public class GameController : MonoBehaviour {
 
     public void AddOnMoneyUpdate(Action action) => onMoneyUpdate.Add(action);
 
-    public void SpawnMissile() {
+    public Missile SpawnMissile() {
         if (gameStatus != GameStatus.IDLE)
-            return;
+            return null;
 
-        Instantiate(missile, missileSpawnPosition.position, missile.transform.rotation);
+        return Instantiate(missile, missileSpawnPosition.position, missile.transform.rotation);
+    }
+
+    public void BuyMissile() {
+        SpawnMissile();
 
         UpdateMoney(money - missile.getCost());
 
-        ToggleDrawer();
+        multiplayerController.SpawnMissile();
+
+        HideDrawer();
     }
 
-    public void ToggleDrawer() {
-        drawer.SetActive(!drawer.activeSelf);
+    public void ShowDrawer() {
+        drawer.SetActive(true);
+    }
+
+    public void HideDrawer() {
+        drawer.SetActive(false);
     }
 
     public GameStatus GetGameStatus() {
