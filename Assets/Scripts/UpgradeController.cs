@@ -12,14 +12,17 @@ public class UpgradeController : MonoBehaviour {
     public Button sellButton;
 
     public GameObject turretsDrawer;
+    public GameObject upgradeDrawer;
 
     private TurretSelector turretSelector;
+    private MultiplayerController multiplayerController;
 
     private Turret selectedTurret;
     private NextUpgradeInfo info;
 
     void Start() {
         turretSelector = FindObjectOfType<TurretSelector>();
+        multiplayerController = MultiplayerController.DefaultInstance;
 
         gameController.AddOnMoneyUpdate(UpdateUpgradeButtons);
     }
@@ -53,12 +56,12 @@ public class UpgradeController : MonoBehaviour {
     }
 
     public void Show() {
-        gameObject.SetActive(true);
+        upgradeDrawer.SetActive(true);
         turretsDrawer.SetActive(false);
     }
 
     public void Hide() {
-        gameObject.SetActive(false);
+        upgradeDrawer.SetActive(false);
         turretsDrawer.SetActive(true);
     }
 
@@ -70,23 +73,34 @@ public class UpgradeController : MonoBehaviour {
 
         gameController.UpdateMoney(gameController.money + selectedTurret.sellValue);
 
-        gameObject.SetActive(false);
-        turretsDrawer.SetActive(true);
+        Hide();
     }
 
-    public void UpgradeTurret() {
-        if (gameController.GetGameStatus() != GameStatus.IDLE)
-            return;
-        
+    public void UpgradeSelectedTurret() {
         gameController.UpdateMoney(gameController.money - info.cost);
+        
+        Turret newTurret = UpgradeTurret(selectedTurret);
 
-        Transform prevTransform = selectedTurret.transform;
+        multiplayerController.UpgradeTurret(selectedTurret);
 
-        Destroy(selectedTurret.gameObject);
+        turretSelector.OnTurretSelected(newTurret);
+    }
+
+    public Turret UpgradeTurret(string index) {
+        return UpgradeTurret(gameController.GetTurret(index));
+    }
+
+    public Turret UpgradeTurret(Turret turret) {
+        if (gameController.GetGameStatus() != GameStatus.IDLE)
+            return null;
+
+        Transform prevTransform = turret.transform;
+        NextUpgradeInfo info = turret.GetComponent<NextUpgradeInfo>();
+        Destroy(turret.gameObject);
 
         Turret newTurret = Instantiate(info.nextUpgrade, prevTransform.position, prevTransform.rotation);
         newTurret.Activate();
 
-        turretSelector.OnTurretSelected(newTurret);
+        return newTurret;
     }
 }

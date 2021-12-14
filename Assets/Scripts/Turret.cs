@@ -17,6 +17,7 @@ public class Turret : Purchasable {
     public GameObject cannon;
     public int cost;
     public int sellValue;
+    public int type;
 
     [Header("Shooting")]
     public GameObject bullet;
@@ -31,6 +32,11 @@ public class Turret : Purchasable {
     private bool readyToShoot;
     private int enemiesMask, obstaclesMask;
     private TurretStatus currentStatus;
+
+    [HideInInspector]
+    public int index;
+    [HideInInspector]
+    public string playerId;
 
     void Awake() {
         readyToShoot = true;
@@ -57,6 +63,10 @@ public class Turret : Purchasable {
 
             Shoot(predictedEnemyPos.Value);
         }
+    }
+
+    public string GetIdentifier() {
+        return playerId + "-" + index;
     }
 
     Vector3? FindFirstEnemyPosition() {

@@ -59,16 +59,13 @@ public class CameraFeedController : MonoBehaviour {
     }
 
     void ReadQR() { 
-        try {
-            Result result = barcodeReader.Decode(croppedTexture.GetPixels32(), width, height);
-            if (result != null) {
-                Stop();
-                cameraFeedUI.SetActive(false);
-                RoomInfo roomInfo = JsonUtility.FromJson<RoomInfo>(result.Text);
-                roomController.ShowWaitingRoom(roomInfo);
-            }
+        Result result = barcodeReader.Decode(croppedTexture.GetPixels32(), width, height);
+        if (result != null) {
+            Stop();
+            cameraFeedUI.SetActive(false);
+            RoomInfo roomInfo = JsonUtility.FromJson<RoomInfo>(result.Text);
+            roomController.ShowWaitingRoom(roomInfo);
         }
-        catch (Exception ex) { Debug.LogWarning(ex.Message); }
     }
 
     void Update() {

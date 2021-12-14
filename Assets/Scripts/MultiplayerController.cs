@@ -49,8 +49,12 @@ public class MultiplayerController {
     }
 
     #region Multiplayer Events
-    public void PlaceTurret(int turretIndex, Vector3 position) {
-        networkController.SendEvent(new PlaceTurretEvent(turretIndex, position));
+    public void PlaceTurret(Turret turret) {
+        networkController.SendEvent(new PlaceTurretEvent(turret.type, turret.transform.position, turret.playerId, turret.index));
+    }
+
+    public void UpgradeTurret(Turret turret) {
+        networkController.SendEvent(new UpgradeTurretEvent(turret.GetIdentifier()));
     }
 
     public void StartButton() {

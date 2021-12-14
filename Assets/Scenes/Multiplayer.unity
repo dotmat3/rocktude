@@ -3801,7 +3801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showImage: {fileID: 1264133069}
   cameraFeedUI: {fileID: 1928877622}
-  multiplayerController: {fileID: 1261716889}
+  roomController: {fileID: 1261716889}
 --- !u!1 &1285197530
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class TurretSelector : MonoBehaviour {
         turretsMask = LayerMask.GetMask("Turret");
 
         turretPlacer = FindObjectOfType<TurretPlacer>();
-        upgradeController = upgradeDrawer.GetComponent<UpgradeController>();
+        upgradeController = FindObjectOfType<UpgradeController>();
     }
 
     void Update() {

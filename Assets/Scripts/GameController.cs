@@ -45,6 +45,8 @@ public class GameController : MonoBehaviour {
     private readonly List<Action> onMoneyUpdate = new List<Action>();
     private MultiplayerController multiplayerController;
 
+    private Dictionary<string, Turret> turrets = new Dictionary<string, Turret>();
+
     void Start() {
         multiplayerController = MultiplayerController.DefaultInstance;
 
@@ -131,5 +133,17 @@ public class GameController : MonoBehaviour {
 
     public bool IsMultiplayer() {
         return multiplayerController.GetRoomInfo().HasValue;
+    }
+
+    public Dictionary<string, Turret> GetTurrets() {
+        return turrets;
+    }
+
+    public Turret GetTurret(string index) {
+        return turrets[index];
+    }
+
+    public void StoreTurret(Turret turret) {
+        turrets[turret.GetIdentifier()] = turret;
     }
 }

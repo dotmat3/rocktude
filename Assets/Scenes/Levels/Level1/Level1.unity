@@ -719,7 +719,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1027804451}
+      - m_Target: {fileID: 579490852}
         m_TargetAssemblyTypeName: UpgradeController, Assembly-CSharp
         m_MethodName: SellTurret
         m_Mode: 1
@@ -1908,6 +1908,7 @@ GameObject:
   - component: {fileID: 579490850}
   - component: {fileID: 579490851}
   - component: {fileID: 579490849}
+  - component: {fileID: 579490852}
   m_Layer: 0
   m_Name: WorldController
   m_TagString: Untagged
@@ -2013,6 +2014,24 @@ MonoBehaviour:
   - {fileID: 4218611715543721684, guid: d084bc0d93886b445b8adbbf7b553cbf, type: 3}
   boss: {fileID: 246900267, guid: 873ce52063653df4fafb4095653465fa, type: 3}
   startButton: {fileID: 1586070192}
+--- !u!114 &579490852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579490846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4041ef98f348c746912cfaf8216da45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameController: {fileID: 579490850}
+  description: {fileID: 1478104109}
+  upgradeButton: {fileID: 748554650}
+  sellButton: {fileID: 207878936}
+  turretsDrawer: {fileID: 442683322}
+  upgradeDrawer: {fileID: 1027804449}
 --- !u!1 &640409129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2745,9 +2764,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1027804451}
+      - m_Target: {fileID: 579490852}
         m_TargetAssemblyTypeName: UpgradeController, Assembly-CSharp
-        m_MethodName: UpgradeTurret
+        m_MethodName: UpgradeSelectedTurret
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3534,7 +3553,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1027804450}
-  - component: {fileID: 1027804451}
   m_Layer: 5
   m_Name: UpgradeDrawer
   m_TagString: Untagged
@@ -3565,23 +3583,6 @@ RectTransform:
   m_AnchoredPosition: {x: -132.63, y: -416.5}
   m_SizeDelta: {x: 1560, y: 496.325}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1027804451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027804449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4041ef98f348c746912cfaf8216da45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameController: {fileID: 579490850}
-  description: {fileID: 1478104109}
-  upgradeButton: {fileID: 748554650}
-  sellButton: {fileID: 207878936}
-  turretsDrawer: {fileID: 442683322}
 --- !u!1001 &1040188905
 PrefabInstance:
   m_ObjectHideFlags: 0

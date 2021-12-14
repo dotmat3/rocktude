@@ -42,33 +42,54 @@ public class LeaveRoomEvent : SocketEvent {
     }
 
     public override void ExecuteHandler() {
-        GameObject.FindObjectOfType<RoomController>().OnPlayerLeave(this);
+        RoomController roomController = GameObject.FindObjectOfType<RoomController>();
+        if (roomController)
+            roomController.OnPlayerLeave(this);
     }
 }
 
 public class StartGameEvent : SocketEvent {
 
     public override void ExecuteHandler() {
-        GameObject.FindObjectOfType<RoomController>().StartGame(this);
+        RoomController roomController = GameObject.FindObjectOfType<RoomController>();
+        if (roomController)
+            roomController.StartGame(this);
     }
 }
 #endregion
 
 #region Game Events
 public class PlaceTurretEvent : SocketEvent {
-    public int index;
+    public int turretType;
     public Vector3 position;
+    public string playerId;
+    public int index;
 
-    public PlaceTurretEvent(int index, Vector3 position) {
-        this.index = index;
+    public PlaceTurretEvent(int turretType, Vector3 position, string playerId, int index) {
+        this.turretType = turretType;
         this.position = position;
+        this.playerId = playerId;
+        this.index = index;
     }
 
     public override void ExecuteHandler() {
         TurretPlacer turretPlacer = GameObject.FindObjectOfType<TurretPlacer>();
-        Turret turret = turretPlacer.PlaceTurret(index, position);
+        Turret turret = turretPlacer.PlaceTurret(turretType, position, playerId, index);
         turret.Activate();
         turret.ChangeStatus(Turret.TurretStatus.Idle);
+    }
+}
+
+public class UpgradeTurretEvent : SocketEvent {
+    public string index;
+
+    public UpgradeTurretEvent(string index) {
+        this.index = index;
+    }
+
+    public override void ExecuteHandler() {
+        UpgradeController upgradeController = GameObject.FindObjectOfType<UpgradeController>();
+        upgradeController.UpgradeTurret(index);
     }
 }
 

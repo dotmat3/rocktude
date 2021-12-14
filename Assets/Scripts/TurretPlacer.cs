@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Firebase.Auth;
 
 [Serializable]
 public abstract class Purchasable : MonoBehaviour {
@@ -25,10 +26,13 @@ public class TurretPlacer : MonoBehaviour {
     private bool buying = false;
     private int buyingTurretIndex = -1;
     private int turretCost = -1;
+    private int numTurretsPlaced = 0;
 
+    private FirebaseAuth auth;
 
     void Start() {
         multiplayerController = MultiplayerController.DefaultInstance;
+        auth = FirebaseAuth.DefaultInstance;
 
         terrainMask = LayerMask.GetMask("Terrain");
 
@@ -85,8 +89,11 @@ public class TurretPlacer : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
-                currentTurret = PlaceTurret(buyingTurretIndex, hit.point);
+            if (Physics.Raycast(ray, out RaycastHit hit)) {
+                FirebaseUser user = auth.CurrentUser;
+                currentTurret = PlaceTurret(buyingTurretIndex, hit.point, user.UserId, numTurretsPlaced);
+                numTurretsPlaced++;
+            }
         }
     }
 
@@ -104,7 +111,7 @@ public class TurretPlacer : MonoBehaviour {
             if (currentTurret.getCurrentStatus() == Turret.TurretStatus.Colliding) {
                 CancelBuying();
             } else {
-                multiplayerController.PlaceTurret(buyingTurretIndex, currentTurret.transform.position);
+                multiplayerController.PlaceTurret(currentTurret);
 
                 currentTurret.Activate();
                 currentTurret.ChangeStatus(Turret.TurretStatus.Idle);
@@ -133,17 +140,20 @@ public class TurretPlacer : MonoBehaviour {
         buying = false;
     }
 
-    public Turret PlaceTurret(int index, Vector3 position) {
-        Turret gameObject = (Turret) purchasables[index];
+    public Turret PlaceTurret(int type, Vector3 position, string playerId, int index) {
+        Turret prefab = (Turret) purchasables[type];
+        
+        Turret turret = Instantiate(prefab, position, Quaternion.identity);
+        turret.ChangeStatus(Turret.TurretStatus.Selected);
 
-        return PlaceTurret(gameObject, position);
-    }
+        turret.type = type;
+        turret.playerId = playerId;
+        turret.index = index;
 
-    public Turret PlaceTurret(Turret turret, Vector3 position) {
-        Turret gameObject = Instantiate(turret, position, Quaternion.identity);
-        gameObject.ChangeStatus(Turret.TurretStatus.Selected);
+        // Store the placed turret info
+        gameController.StoreTurret(turret);
 
-        return gameObject;
+        return turret;
     }
 
     public bool IsBuying() {
