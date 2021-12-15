@@ -90,8 +90,8 @@ public class TurretPlacer : MonoBehaviour {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit)) {
-                FirebaseUser user = auth.CurrentUser;
-                currentTurret = PlaceTurret(buyingTurretIndex, hit.point, user.UserId, numTurretsPlaced);
+                string userId = UserController.DefaultInstance.GetUserId();
+                currentTurret = PlaceTurret(buyingTurretIndex, hit.point, userId, numTurretsPlaced);
                 numTurretsPlaced++;
             }
         }

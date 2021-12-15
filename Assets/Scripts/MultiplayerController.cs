@@ -34,6 +34,11 @@ public class MultiplayerController {
         this.players = players;
     }
 
+    public void OnPlayerLeave(LeaveRoomEvent leaveRoomEvent) {
+        players.Remove(leaveRoomEvent.userId);
+        GameObject.FindObjectOfType<GameController>().UpdatePlayers();
+    }
+
     public void Exit() {
         this.roomInfo = null;
         this.players.Clear();

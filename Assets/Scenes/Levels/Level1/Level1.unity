@@ -1909,6 +1909,7 @@ GameObject:
   - component: {fileID: 579490851}
   - component: {fileID: 579490849}
   - component: {fileID: 579490852}
+  - component: {fileID: 579490853}
   m_Layer: 0
   m_Name: WorldController
   m_TagString: Untagged
@@ -2032,6 +2033,18 @@ MonoBehaviour:
   sellButton: {fileID: 207878936}
   turretsDrawer: {fileID: 442683322}
   upgradeDrawer: {fileID: 1027804449}
+--- !u!114 &579490853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579490846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f60506b805b77f74d8d8859a17b5695e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &640409129
 GameObject:
   m_ObjectHideFlags: 0

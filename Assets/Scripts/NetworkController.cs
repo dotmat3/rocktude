@@ -138,26 +138,26 @@ public class NetworkController {
         }
     }
 
-    public static IEnumerator SendPostRequest(string url, string data, Action<UnityWebRequest> callback) {
+    public static IEnumerator SendPostRequest(string url, string data, Action<UnityWebRequest> callback = null) {
         using (UnityWebRequest request = UnityWebRequest.Post(url, data)) {
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
-            callback(request);
+            callback?.Invoke(request);
         }
     }
 
-    public static IEnumerator SendPutRequest(string url, string data, Action<UnityWebRequest> callback) {
+    public static IEnumerator SendPutRequest(string url, string data, Action<UnityWebRequest> callback = null) {
         using (UnityWebRequest request = UnityWebRequest.Put(url, data)) {
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
-            callback(request);
+            callback?.Invoke(request);
         }
     }
 
-    public static IEnumerator SendGetTextureRequest(string url, Action<UnityWebRequest> callback) {
+    public static IEnumerator SendGetTextureRequest(string url, Action<UnityWebRequest> callback = null) {
         using (UnityWebRequest request = UnityWebRequestTexture.GetTexture(url)) {
             yield return request.SendWebRequest();
-            callback(request);
+            callback?.Invoke(request);
         }
     }
     #endregion

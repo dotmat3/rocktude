@@ -686,7 +686,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1731601831}
         m_TargetAssemblyTypeName: MainScene, Assembly-CSharp
-        m_MethodName: MultiPlayer
+        m_MethodName: Leaderboard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

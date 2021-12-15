@@ -45,6 +45,10 @@ public class LeaveRoomEvent : SocketEvent {
         RoomController roomController = GameObject.FindObjectOfType<RoomController>();
         if (roomController)
             roomController.OnPlayerLeave(this);
+        else {
+            MultiplayerController multiplayerController = MultiplayerController.DefaultInstance;
+            multiplayerController.OnPlayerLeave(this);
+        }
     }
 }
 

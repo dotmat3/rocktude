@@ -50,13 +50,7 @@ public class GameController : MonoBehaviour {
     void Start() {
         multiplayerController = MultiplayerController.DefaultInstance;
 
-        if (IsMultiplayer()) {
-            RoomInfo? roomInfo = multiplayerController.GetRoomInfo();
-            var players = multiplayerController.GetPlayers();
-            playersUI.GetComponent<Text>().text = $"players\n{players.Count}/{roomInfo.Value.maxPlayers}";
-            playersUI.SetActive(true);
-        }
-
+        UpdatePlayers();
         UpdateMoney(startMoney);
         UpdateLives(startLives);
         UpdateRounds();
@@ -75,6 +69,16 @@ public class GameController : MonoBehaviour {
     }
 
     #region Update UI
+
+    public void UpdatePlayers() {
+        if (IsMultiplayer()) {
+            RoomInfo? roomInfo = multiplayerController.GetRoomInfo();
+            var players = multiplayerController.GetPlayers();
+            playersUI.GetComponent<Text>().text = $"players\n{players.Count}/{roomInfo.Value.maxPlayers}";
+            playersUI.SetActive(true);
+        }
+    }
+
     public void UpdateMoney(int amount) {
         money = amount;
 

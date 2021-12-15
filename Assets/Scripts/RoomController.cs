@@ -26,7 +26,7 @@ public class RoomController : MonoBehaviour {
     public const int SERVER_PORT = 2043;
 
     // Index of the map associated to the level 1
-    public const int START_MAP_INDEX = 3;
+    public const int START_MAP_INDEX = 4;
 
     [Header("Main")]
     public GameObject mainUI;
@@ -89,7 +89,7 @@ public class RoomController : MonoBehaviour {
             ShowWaitingRoom(roomInfo);
         }
 
-        StartCoroutine(NetworkController.SendPutRequest(url, data, callback));
+        StartCoroutine(NetworkController.SendPostRequest(url, data, callback));
     }
     #endregion
 
@@ -117,9 +117,9 @@ public class RoomController : MonoBehaviour {
 
         networkController.Connect();
 
-        FirebaseUser user = auth.CurrentUser;
-        string userId = user == null ? "123456" : user.UserId;
-        string username = user == null ? "Test user" : user.DisplayName;
+        UserController userController = UserController.DefaultInstance;
+        string userId = userController.GetUserId();
+        string username = userController.GetUsername();
         JoinRoomEvent joinRoomEvent = new JoinRoomEvent(roomInfo.code, userId, username);
         networkController.SendEvent(joinRoomEvent);
 
@@ -188,7 +188,7 @@ public class RoomController : MonoBehaviour {
         for (int i = 0; i < waitingPlayers.Count; i++)
             waitingPlayers[i].GetComponent<Text>().text = $"Player {i + 1}";
 
-        string currentUsername = auth.CurrentUser == null ? "Test user" : auth.CurrentUser.DisplayName;
+        string currentUsername = UserController.DefaultInstance.GetUsername();
 
         foreach (var (index, joinRoomEvent) in joinedPlayers.Values)
             if (joinRoomEvent.username == currentUsername)
@@ -212,7 +212,6 @@ public class RoomController : MonoBehaviour {
     #region Join Room
     public void LoadRooms() {
         string url = $"{SERVER_ADDRESS}:{SERVER_PORT}/rooms";
-        Debug.Log(url);
 
         foreach (Transform child in roomsList.transform)
             Destroy(child.gameObject);

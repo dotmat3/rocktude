@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour {
 
     private GameController gameController;
     private WaveController waveController;
+    private LeaderboardController leaderboardController;
     private PathCreator pathCreator;
 
     private float height;
@@ -22,7 +23,8 @@ public class Enemy : MonoBehaviour {
     private void Start() {
         gameController = FindObjectOfType<GameController>();
         waveController = FindObjectOfType<WaveController>();
-        
+        leaderboardController = FindObjectOfType<LeaderboardController>();
+
         height = GetComponent<MeshRenderer>().bounds.size.y;
 
         pathCreator = gameController.pathLevel;
@@ -60,6 +62,8 @@ public class Enemy : MonoBehaviour {
             // The enemy was destroyed by a turret
             GameObject effect = Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(effect, 2f);
+
+            leaderboardController.UpdateEnemyKilled(1);
 
             waveController.EnemyRemoved();
             Destroy(gameObject);

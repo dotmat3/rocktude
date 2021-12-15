@@ -113,6 +113,10 @@ public class MainScene : MonoBehaviour {
         SceneManager.LoadScene(2);
     }
 
+    public void Leaderboard() {
+        SceneManager.LoadScene(3);
+    }
+
     public void Quit() {
         Application.Quit();
     }
@@ -131,9 +135,11 @@ public class MainScene : MonoBehaviour {
         mainMenu.SetActive(true);
         loginMenu.SetActive(false);
 
-        if (auth.CurrentUser != null) {
+        FirebaseUser user = UserController.DefaultInstance.GetUser();
+
+        if (user != null) {
             RawImage img = mainMenu.GetComponentInChildren<RawImage>();
-            System.Uri url = auth.CurrentUser.PhotoUrl;
+            System.Uri url = user.PhotoUrl;
 
             StartCoroutine(SetImage(img, url.ToString()));        
         }
