@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour {
 
     public GameObject drawer;
     public GameObject playersUI;
+    public GameObject speedUpButton;
 
     [Header("Round")]
     public int round = 1;
@@ -46,6 +47,8 @@ public class GameController : MonoBehaviour {
     private MultiplayerController multiplayerController;
 
     private Dictionary<string, Turret> turrets = new Dictionary<string, Turret>();
+
+    private float timeScale = 1f;
 
     void Start() {
         multiplayerController = MultiplayerController.DefaultInstance;
@@ -159,5 +162,17 @@ public class GameController : MonoBehaviour {
 
     public void StoreTurret(Turret turret) {
         turrets[turret.GetIdentifier()] = turret;
+    }
+
+    public void ToggleSpeedUpTime() {
+        if (timeScale == 1) {
+            speedUpButton.GetComponent<Image>().color = Color.green;
+            Time.timeScale = timeScale = 2;
+        }
+        else {
+            speedUpButton.GetComponent<Image>().color = Color.white;
+            Time.timeScale = timeScale = 1;
+        }
+
     }
 }

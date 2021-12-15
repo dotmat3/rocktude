@@ -29,7 +29,7 @@ public class Missile : Purchasable {
             InvokeRepeating("SendUpdate", 0.02f, 0.02f);
     }
 
-    void Update() {
+    void FixedUpdate() {
         if (active) {
             float x = Input.acceleration.x;
             float y = Input.acceleration.y;
@@ -38,7 +38,7 @@ public class Missile : Purchasable {
 
             Vector3 direction = new Vector3(8f * forward.x, 4f * forward.y, 4f * forward.z);
             transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
-            GetComponent<Rigidbody>().velocity = direction * speed * Time.deltaTime;
+            GetComponent<Rigidbody>().velocity = direction * speed * Time.unscaledDeltaTime;
         }
     }
 

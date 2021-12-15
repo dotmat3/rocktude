@@ -70,7 +70,7 @@ public class EasyFps : MonoBehaviour {
     {
         if (timeCounter < refresht)
         {
-            timeCounter += Time.deltaTime;
+            timeCounter += Time.unscaledDeltaTime;
             frameCounter++;
         }
         else
