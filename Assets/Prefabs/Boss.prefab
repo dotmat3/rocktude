@@ -112,7 +112,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 18.829353
   m_Center: {x: 0.10977554, y: 0.0018053055, z: -0.09186745}
---- !u!114 &246900267
+--- !u!114 &-7235198779844759424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,11 +121,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4175997182896312855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6be7025328e8ad3489d2dff1fd8ee325, type: 3}
+  m_Script: {fileID: 11500000, guid: fa54ec2fedc51814db82f83a38e7afa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   endOfPathInstruction: 2
   speed: 1
-  health: 10
+  health: 800
   impactEffect: {fileID: 214270318505080964, guid: b3655805f67d02b4aa97093db01db87e,
     type: 3}

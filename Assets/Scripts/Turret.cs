@@ -41,14 +41,10 @@ public class Turret : Purchasable {
     [HideInInspector]
     public string playerId;
 
-    private MultiplayerController multiplayerController;
-
     void Awake() {
         readyToShoot = true;
 
         ChangeStatus(TurretStatus.Idle);
-
-        multiplayerController = MultiplayerController.DefaultInstance;
     }
 
     void Start() {

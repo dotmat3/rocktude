@@ -8,21 +8,22 @@ public class Enemy : MonoBehaviour {
     public EndOfPathInstruction endOfPathInstruction;
     public float speed = 5f;
     public int health = 1;
+    protected int initialHealth;
     public GameObject impactEffect;
 
     protected float distanceTravelled;
 
-    private GameController gameController;
-    private WaveController waveController;
-    private LeaderboardController leaderboardController;
-    private PathCreator pathCreator;
+    protected GameController gameController;
+    protected WaveController waveController;
+    protected LeaderboardController leaderboardController;
+    protected PathCreator pathCreator;
 
-    private float height;
-    private Vector3 lastPoint;
+    protected float height;
+    protected Vector3 lastPoint;
 
-    private bool hit = false;
+    protected bool hit = false;
 
-    private void Start() {
+    public virtual void Start() {
         gameController = FindObjectOfType<GameController>();
         waveController = FindObjectOfType<WaveController>();
         leaderboardController = FindObjectOfType<LeaderboardController>();
@@ -32,6 +33,8 @@ public class Enemy : MonoBehaviour {
         pathCreator = gameController.pathLevel;
         lastPoint = pathCreator.path.GetPoint(pathCreator.path.NumPoints - 1);
         lastPoint.y += height;
+
+        initialHealth = health;
     }
 
     void Update() {
@@ -57,7 +60,7 @@ public class Enemy : MonoBehaviour {
         return position;
     }
 
-    public void TakeDamage(int amount) {
+    public virtual void TakeDamage(int amount) {
         // The enemy was already hit
         if (hit)
             return;
