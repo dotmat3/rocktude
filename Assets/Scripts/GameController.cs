@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
     public GameObject drawer;
     public GameObject playersUI;
     public GameObject speedUpButton;
+    public GameObject backPopup;
 
     [Header("Round")]
     public int round = 1;
@@ -64,11 +65,7 @@ public class GameController : MonoBehaviour {
         multiplayerController.Update();
 
         if (Input.GetKeyUp(KeyCode.Escape)) {
-            if (IsMultiplayer()) {
-                multiplayerController.Exit();
-                SceneManager.LoadScene(2);
-            } else
-                SceneManager.LoadScene(1);
+            ShowBackPopup();
         }
     }
 
@@ -189,5 +186,20 @@ public class GameController : MonoBehaviour {
         if (Input.touchCount > 0)
             return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
         return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    public void ShowBackPopup() {
+        backPopup.SetActive(true);
+    }
+    public void HideBackPopup() {
+        backPopup.SetActive(false);
+    }
+    public void GoBack() {
+        if (IsMultiplayer()) {
+            multiplayerController.Exit();
+            SceneManager.LoadScene(2);
+        }
+        else
+            SceneManager.LoadScene(1);
     }
 }
