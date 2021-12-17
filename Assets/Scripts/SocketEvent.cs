@@ -170,4 +170,12 @@ public class DisableMalusEvent : SocketEvent {
         malusController.EnableTurret(turretId);
     }
 }
+
+public class SpeedUpEvent : SocketEvent {
+
+    public override void ExecuteHandler() {
+        GameController gameController = GameObject.FindObjectOfType<GameController>();
+        gameController.ToggleSpeedUpTime();
+    }
+}
 #endregion

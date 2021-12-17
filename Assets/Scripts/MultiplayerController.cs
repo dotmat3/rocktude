@@ -87,5 +87,9 @@ public class MultiplayerController {
         networkController.SendEvent(new DisableMalusEvent(turretId));
     }
 
+    public void ToggleSpeedUp() {
+        networkController.SendEvent(new SpeedUpEvent());
+    }
+
     #endregion
 }

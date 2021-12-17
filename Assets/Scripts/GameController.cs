@@ -169,6 +169,11 @@ public class GameController : MonoBehaviour {
         turrets.Remove(turret.GetIdentifier());
     }
 
+    public void OnSpeedUp() {
+        multiplayerController.ToggleSpeedUp();
+        ToggleSpeedUpTime();
+    }
+
     public void ToggleSpeedUpTime() {
         if (timeScale == 1) {
             speedUpButton.GetComponent<Image>().color = Color.green;

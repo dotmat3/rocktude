@@ -603,7 +603,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 579490850}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: ToggleSpeedUpTime
+        m_MethodName: OnSpeedUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
