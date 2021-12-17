@@ -13,6 +13,8 @@ public class BulletController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider collider) {
+        Destroy(gameObject);
+
         if (collider.gameObject.tag == "Enemy") {
             Enemy enemy = collider.GetComponent<Enemy>();
             enemy.TakeDamage(1);
@@ -21,8 +23,6 @@ public class BulletController : MonoBehaviour {
 
             gameController.UpdateMoney(gameController.money + 1);
         }
-
-        Destroy(gameObject);
     }
 
     void OnBecameInvisible() {

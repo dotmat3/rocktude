@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,7 +45,7 @@ public class WaveController : MonoBehaviour {
     public void EnemyRemoved() {
         enemiesCurrentRound--;
 
-        if (enemiesCurrentRound == 0)
+        if (enemiesCurrentRound <= 0)
             EndRound();
     }
 
@@ -63,7 +64,7 @@ public class WaveController : MonoBehaviour {
     }
 
     public void StartRound() {
-        if (enemiesCurrentRound != 0) return;
+        if (enemiesCurrentRound > 0) return;
 
         int round = gameController.round - 1;
 
@@ -81,6 +82,13 @@ public class WaveController : MonoBehaviour {
             float interval = 1f - (.1f * (round % 10));
             InvokeRepeating("SpawnEnemy", interval, interval);
         }
+    }
+
+    public Enemy SpawnPreviousTier(Enemy enemy) {
+        Enemy prefab = enemies[enemy.health - 1];
+        Enemy newEnemy = Instantiate(prefab, enemy.transform.position, enemy.transform.rotation);
+        newEnemy.SetDistanceTravelled(enemy.GetDistanceTravelled());
+        return newEnemy;
     }
 
     public void EnableAutoRound() => autoStartRound = true;

@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour {
     private float height;
     private Vector3 lastPoint;
 
+    private bool hit = false;
+
     private void Start() {
         gameController = FindObjectOfType<GameController>();
         waveController = FindObjectOfType<WaveController>();
@@ -56,19 +58,35 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDamage(int amount) {
+        // The enemy was already hit
+        if (hit)
+            return;
+        
+        hit = true;
+        Destroy(gameObject);
+
+        // The enemy is already dead, stop killing him!
+        if (health <= 0)
+            return;
+
         health -= amount;
 
-        if (health <= 0) {
-            // The enemy was destroyed by a turret
-            GameObject effect = Instantiate(impactEffect, transform.position, transform.rotation);
-            Destroy(effect, 2f);
+        // Spawn particle effect
+        GameObject effect = Instantiate(impactEffect, transform.position, transform.rotation);
+        Destroy(effect, 2f);
 
-            leaderboardController.UpdateEnemyKilled(1);
+        if (health <= 0)
+            OnKill();
+        else
+            waveController.SpawnPreviousTier(this);
+    }
 
-            waveController.EnemyRemoved();
-            Destroy(gameObject);
-        }
+    public void OnKill() {
+        leaderboardController.UpdateEnemyKilled(1);
+        waveController.EnemyRemoved();
     }
 
     public float GetDistanceTravelled() => distanceTravelled;
+
+    public void SetDistanceTravelled(float newDist) => distanceTravelled = newDist;
 }
