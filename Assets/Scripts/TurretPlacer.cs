@@ -115,6 +115,10 @@ public class TurretPlacer : MonoBehaviour {
 
                 currentTurret.Activate();
                 currentTurret.ChangeStatus(Turret.TurretStatus.Idle);
+
+                // Store the placed turret info
+                gameController.StoreTurret(currentTurret);
+
                 // Remove the current turret otherwise the CancelBuying method will destroy it
                 currentTurret = null;
 
@@ -155,9 +159,6 @@ public class TurretPlacer : MonoBehaviour {
         turret.type = type;
         turret.playerId = playerId;
         turret.index = index;
-
-        // Store the placed turret info
-        gameController.StoreTurret(turret);
 
         return turret;
     }

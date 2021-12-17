@@ -82,6 +82,10 @@ public class PlaceTurretEvent : SocketEvent {
         Turret turret = turretPlacer.PlaceTurret(turretType, position, playerId, index);
         turret.Activate();
         turret.ChangeStatus(Turret.TurretStatus.Idle);
+
+        // Store the placed turret info
+        GameController gameController = GameObject.FindObjectOfType<GameController>();
+        gameController.StoreTurret(turret);
     }
 }
 
