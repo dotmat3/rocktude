@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using PathCreation;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public enum GameStatus {
     IDLE,
@@ -177,6 +178,11 @@ public class GameController : MonoBehaviour {
             speedUpButton.GetComponent<Image>().color = Color.white;
             Time.timeScale = timeScale = 1;
         }
+    }
 
+    public static bool IsPointerOverUI() {
+        if (Input.touchCount > 0)
+            return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }

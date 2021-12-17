@@ -86,7 +86,7 @@ public class TurretPlacer : MonoBehaviour {
     }
 
     void HandleNewTurret() {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
+        if (Input.GetMouseButtonDown(0) && !GameController.IsPointerOverUI()) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit)) {
@@ -122,6 +122,11 @@ public class TurretPlacer : MonoBehaviour {
 
                 CancelBuying();
             }
+    }
+
+    public void OnDrawerEnter() {
+        if (currentTurret != null)
+            CancelBuying();
     }
 
     public void CancelBuying() {

@@ -23,7 +23,7 @@ public class TurretSelector : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetMouseButtonDown(0) && !turretPlacer.IsBuying() && !IsPointerOverUI()) {
+        if (Input.GetMouseButtonDown(0) && !turretPlacer.IsBuying() && !GameController.IsPointerOverUI()) {
 
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
@@ -32,12 +32,6 @@ public class TurretSelector : MonoBehaviour {
             else
                 OnClearSelection();
         }
-    }
-
-    bool IsPointerOverUI() {
-        if (Input.touchCount > 0)
-            return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
-        return  EventSystem.current.IsPointerOverGameObject();
     }
 
     public void OnTurretSelected(Turret turret) {
