@@ -164,6 +164,10 @@ public class GameController : MonoBehaviour {
         turrets[turret.GetIdentifier()] = turret;
     }
 
+    public void RemoveTurret(Turret turret) {
+        turrets.Remove(turret.GetIdentifier());
+    }
+
     public void ToggleSpeedUpTime() {
         if (timeScale == 1) {
             speedUpButton.GetComponent<Image>().color = Color.green;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589245, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276807, g: 0.21589197, b: 0.29782572, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -164,6 +164,87 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1912985279}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &18690966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 18690967}
+  - component: {fileID: 18690969}
+  - component: {fileID: 18690968}
+  m_Layer: 5
+  m_Name: Malus Message
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &18690967
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18690966}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1051822928}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -151.362}
+  m_SizeDelta: {x: 1454.047, y: 145.838}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &18690968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18690966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
+    m_FontSize: 73
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 73
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Some turrets will run out of ammo
+
+    Be prepared to refill them!'
+--- !u!222 &18690969
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18690966}
+  m_CullTransparentMesh: 1
 --- !u!1 &29081105
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +550,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1051822928}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -723,10 +804,10 @@ RectTransform:
   m_Father: {fileID: 1027804450}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1378.6792, y: 0}
-  m_SizeDelta: {x: 262.6022, y: 375.002}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 490.09998, y: 0}
+  m_SizeDelta: {x: 213.9607, y: 375.002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &207878936
 MonoBehaviour:
@@ -862,9 +943,9 @@ RectTransform:
   m_Father: {fileID: 442683323}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1114, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 490.09998, y: 0}
   m_SizeDelta: {x: 213.9607, y: 375.002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &347357903
@@ -1506,8 +1587,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: -5.645508}
-  m_SizeDelta: {x: 0.00050354, y: -181.86}
+  m_AnchoredPosition: {x: 0.00024414062, y: -0.0022583008}
+  m_SizeDelta: {x: 0.001, y: -187.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &529207592
 MonoBehaviour:
@@ -1830,6 +1911,7 @@ GameObject:
   - component: {fileID: 579490849}
   - component: {fileID: 579490852}
   - component: {fileID: 579490853}
+  - component: {fileID: 579490854}
   m_Layer: 0
   m_Name: WorldController
   m_TagString: Untagged
@@ -1966,6 +2048,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60506b805b77f74d8d8859a17b5695e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &579490854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579490846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3b25b0d128f22438c92d18c4a1c3cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  malusMessage: {fileID: 18690966}
+  ammoPrefab: {fileID: 1588989292079622438, guid: b6d3a5a5a6ad74d4f8f462a34fb508a3,
+    type: 3}
+  MALUS_PROB: 0.2
+  N_TURRETS: 2
 --- !u!1 &640409129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,7 +2740,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748554648}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2649,10 +2748,10 @@ RectTransform:
   m_Father: {fileID: 1027804450}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 211.11566, y: 0}
-  m_SizeDelta: {x: 336.192, y: 375.002}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 133, y: 248.16}
+  m_SizeDelta: {x: 213.9607, y: 375.002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &748554650
 MonoBehaviour:
@@ -3514,8 +3613,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -132.63, y: -416.5}
-  m_SizeDelta: {x: 1560, y: 496.325}
+  m_AnchoredPosition: {x: -246, y: -416.5}
+  m_SizeDelta: {x: 1244.763, y: 496.325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1040188905
 PrefabInstance:
@@ -3637,6 +3736,7 @@ RectTransform:
   - {fileID: 1203429462}
   - {fileID: 93662842}
   - {fileID: 1586070191}
+  - {fileID: 18690967}
   - {fileID: 155112720}
   m_Father: {fileID: 1025207093}
   m_RootOrder: 0
@@ -6274,8 +6374,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: -5.645508}
-  m_SizeDelta: {x: 0.00050354, y: -181.86}
+  m_AnchoredPosition: {x: 0.00024414062, y: -0.0022277832}
+  m_SizeDelta: {x: 0.001, y: -187.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1816354725
 MonoBehaviour:
@@ -6299,7 +6399,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
-    m_FontSize: 70
+    m_FontSize: 54
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -6790,8 +6890,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: -5.645508}
-  m_SizeDelta: {x: 0.00050354, y: -181.86}
+  m_AnchoredPosition: {x: 0.00024414062, y: -0.0022277832}
+  m_SizeDelta: {x: 0.001, y: -187.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2001477830
 MonoBehaviour:
@@ -6815,7 +6915,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
-    m_FontSize: 70
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3

@@ -79,5 +79,13 @@ public class MultiplayerController {
         networkController.SendEvent(new StartButtonEvent());
     }
 
+    public void EnableMalus(List<string> turretsIds) {
+        networkController.SendEvent(new EnableMalusEvent(turretsIds));
+    }
+
+    public void DisableMalus(string turretId) {
+        networkController.SendEvent(new DisableMalusEvent(turretId));
+    }
+
     #endregion
 }

@@ -33,15 +33,22 @@ public class Turret : Purchasable {
     private int enemiesMask, obstaclesMask;
     private TurretStatus currentStatus;
 
+    public ParticleSystem disabledEffectPrefab;
+    private ParticleSystem disabledEffectInstance;
+
     [HideInInspector]
     public int index;
     [HideInInspector]
     public string playerId;
 
+    private MultiplayerController multiplayerController;
+
     void Awake() {
         readyToShoot = true;
 
         ChangeStatus(TurretStatus.Idle);
+
+        multiplayerController = MultiplayerController.DefaultInstance;
     }
 
     void Start() {
@@ -169,6 +176,8 @@ public class Turret : Purchasable {
         active = false;
     }
 
+    public bool IsActive() => active;
+
     public void ChangeStatus(TurretStatus status) {
         currentStatus = status;
 
@@ -206,5 +215,17 @@ public class Turret : Purchasable {
 
     public override int getCost() {
         return cost;
+    }
+
+    public void ActivateMalus() {
+        if (disabledEffectInstance) return;
+        disabledEffectInstance = Instantiate(disabledEffectPrefab, transform);
+        Deactivate();
+    }
+
+    public void DisableMalus() {
+        Destroy(disabledEffectInstance);
+        disabledEffectInstance = null;
+        Activate();
     }
 }

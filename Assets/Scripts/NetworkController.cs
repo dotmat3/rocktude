@@ -139,8 +139,11 @@ public class NetworkController {
     }
 
     public static IEnumerator SendPostRequest(string url, string data, Action<UnityWebRequest> callback = null) {
-        using (UnityWebRequest request = UnityWebRequest.Post(url, data)) {
+        // Post request body is automatically escaped for form data,
+        // this is why we instatiate a put request but we then change the method to POST
+        using (UnityWebRequest request = UnityWebRequest.Put(url, data)) {
             request.SetRequestHeader("Content-Type", "application/json");
+            request.method = "POST";
             yield return request.SendWebRequest();
             callback?.Invoke(request);
         }

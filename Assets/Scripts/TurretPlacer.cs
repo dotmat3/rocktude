@@ -128,6 +128,7 @@ public class TurretPlacer : MonoBehaviour {
         if (buyingTurretIndex == -1) return;
 
         if (currentTurret) {
+            gameController.RemoveTurret(currentTurret);
             Destroy(currentTurret.gameObject);
             currentTurret = null;
         }

@@ -83,6 +83,7 @@ public class UpgradeController : MonoBehaviour {
             return;
 
         Destroy(turret.gameObject);
+        gameController.RemoveTurret(turret);
     }
 
     public void UpgradeSelectedTurret() {

@@ -10,6 +10,7 @@ public class WaveController : MonoBehaviour {
     public StartButtonBehaviour startButton;
 
     private GameController gameController;
+    private MalusController malusController;
 
     private int enemiesCurrentRound = 0;
     private int numberEnemiesToSpawn;
@@ -19,6 +20,7 @@ public class WaveController : MonoBehaviour {
 
     void Start() {
         gameController = FindObjectOfType<GameController>();
+        malusController = GetComponent<MalusController>();
     }
 
     void SpawnEnemy() {
@@ -28,8 +30,10 @@ public class WaveController : MonoBehaviour {
 
         numberEnemiesToSpawn--;
 
-        if (numberEnemiesToSpawn == 0)
+        if (numberEnemiesToSpawn == 0) {
             CancelInvoke();
+            malusController.CheckMalus();
+        }
     }
 
     void SpawnBoss() {
@@ -62,6 +66,8 @@ public class WaveController : MonoBehaviour {
         if (enemiesCurrentRound != 0) return;
 
         int round = gameController.round - 1;
+
+        malusController.OnStartRound();
 
         if (round == 40) {
             enemiesCurrentRound = 1;

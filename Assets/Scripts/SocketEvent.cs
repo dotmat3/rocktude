@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SocketEvent {
@@ -141,6 +142,32 @@ public class UpdateMissileEvent : SocketEvent {
             missile.transform.position = position;
             missile.transform.rotation = rotation;
         }
+    }
+}
+
+public class EnableMalusEvent : SocketEvent {
+    public List<string> disabledTurrets;
+
+    public EnableMalusEvent(List<string> disabledTurrets) {
+        this.disabledTurrets = disabledTurrets;
+    }
+
+    public override void ExecuteHandler() {
+        MalusController malusController = GameObject.FindObjectOfType<MalusController>();
+        malusController.DisableTurrets(disabledTurrets);        
+    }
+}
+
+public class DisableMalusEvent : SocketEvent {
+    public string turretId;
+
+    public DisableMalusEvent(string turretId) {
+        this.turretId = turretId;
+    }
+
+    public override void ExecuteHandler() {
+        MalusController malusController = GameObject.FindObjectOfType<MalusController>();
+        malusController.EnableTurret(turretId);
     }
 }
 #endregion

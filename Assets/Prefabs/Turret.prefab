@@ -271,6 +271,7 @@ MonoBehaviour:
   cannon: {fileID: 9028764986278202177}
   cost: 100
   sellValue: 50
+  type: 0
   bullet: {fileID: 1099767012462384358, guid: a3d2a92cc5a893d49a3022aa83c19a50, type: 3}
   radius: 5
   shootForce: 20
@@ -278,6 +279,10 @@ MonoBehaviour:
   timeBetweenShooting: 0.5
   attackPoint: {fileID: 9032338974884441253}
   shootParticles: {fileID: 9190152936415182191}
+  disabledEffectPrefab: {fileID: 1551312629276147685, guid: 6d6cf938ffb7fdf4fbc5e705df7f34bd,
+    type: 3}
+  index: 0
+  playerId: 
 --- !u!114 &2549357710202492975
 MonoBehaviour:
   m_ObjectHideFlags: 0
