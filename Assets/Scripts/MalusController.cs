@@ -92,7 +92,11 @@ public class MalusController : MonoBehaviour {
     }
 
     public void SpawnAmmo() {
-        if (disabledTurrets.Count == 0) return;
+        if (disabledTurrets.Count == 0) {
+            AmmoCrate ammoCrate = FindObjectOfType<AmmoCrate>();
+            if (ammoCrate != null) Destroy(ammoCrate.gameObject);
+            return;
+        }
         Instantiate(ammoPrefab);
     }
 }

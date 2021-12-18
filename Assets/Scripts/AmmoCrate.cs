@@ -44,15 +44,13 @@ public class AmmoCrate : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider collider) {
-        // Colliding with a turret   
+        // Colliding with a turret
         Destroy(gameObject);
 
         Turret turret = collider.gameObject.GetComponent<Turret>();
         if (!turret.IsActive()) {
             malusController.EnableTurret(turret);
-            malusController.SpawnAmmo();
             multiplayerController.DisableMalus(turret.GetIdentifier());
-            return;
         }
         malusController.SpawnAmmo();
     }
