@@ -13,6 +13,9 @@ public class BulletController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider collider) {
+        if (gameController.GetGameStatus() != GameStatus.IDLE)
+            return;
+
         Destroy(gameObject);
 
         if (collider.gameObject.tag == "Enemy") {

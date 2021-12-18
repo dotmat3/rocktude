@@ -40,8 +40,8 @@ public class GameController : MonoBehaviour {
     public int lives;
 
     [Header("Other")]
-    public Text gameOverText;
-    public Text victoryText;
+    public GameObject gameOver;
+    public GameObject victory;
 
     private GameStatus gameStatus = GameStatus.IDLE;
 
@@ -106,12 +106,12 @@ public class GameController : MonoBehaviour {
     #endregion
 
     public void Victory() {
-        victoryText.gameObject.SetActive(true);
+        victory.SetActive(true);
         gameStatus = GameStatus.VICTORY;
     }
 
     public void Defeat() {
-        gameOverText.gameObject.SetActive(true);
+        gameOver.SetActive(true);
         gameStatus = GameStatus.GAME_OVER;
     }
 
@@ -125,6 +125,9 @@ public class GameController : MonoBehaviour {
     }
 
     public void BuyMissile() {
+        if (gameStatus != GameStatus.IDLE)
+            return;
+
         SpawnMissile();
 
         UpdateMoney(money - missile.getCost());
