@@ -202,7 +202,9 @@ public class Turret : Purchasable {
         if (currentStatus == TurretStatus.Idle) return;
 
         collisionCounter++;
-        ChangeStatus(TurretStatus.Colliding);
+
+        if (collider.gameObject.layer != LayerMask.NameToLayer("AmmoCrate"))
+            ChangeStatus(TurretStatus.Colliding);
     }
 
     private void OnTriggerExit(Collider collider) {
