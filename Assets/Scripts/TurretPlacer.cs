@@ -115,6 +115,7 @@ public class TurretPlacer : MonoBehaviour {
 
                 currentTurret.Activate();
                 currentTurret.ChangeStatus(Turret.TurretStatus.Idle);
+                currentTurret.PlayReloadSound();
 
                 // Store the placed turret info
                 gameController.StoreTurret(currentTurret);

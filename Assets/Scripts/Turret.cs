@@ -227,6 +227,9 @@ public class Turret : Purchasable {
         Destroy(disabledEffectInstance);
         disabledEffectInstance = null;
         Activate();
+    }
+
+    public void PlayReloadSound() {
         AudioController.PlayOneShot(reloadSound, 3);
     }
 }

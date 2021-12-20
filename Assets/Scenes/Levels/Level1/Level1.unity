@@ -2432,6 +2432,8 @@ MonoBehaviour:
   sellButton: {fileID: 207878936}
   turretsDrawer: {fileID: 442683322}
   upgradeDrawer: {fileID: 1027804449}
+  sellSound: {fileID: 8300000, guid: 467cadeb37f9a08498ec610fc0009de3, type: 3}
+  upgradeSound: {fileID: 8300000, guid: 138539b03714e9a47920036285e9530a, type: 3}
 --- !u!114 &579490853
 MonoBehaviour:
   m_ObjectHideFlags: 0
