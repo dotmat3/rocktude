@@ -5,6 +5,7 @@ using UnityEngine;
 public class AmmoCrate : MonoBehaviour {
     private MalusController malusController;
     private MultiplayerController multiplayerController;
+    private GyroController gyroController;
 
     public float horizontalSpeed = 10f;
     public float verticalSpeed = 10f;
@@ -13,13 +14,14 @@ public class AmmoCrate : MonoBehaviour {
     void Start() {
         malusController = FindObjectOfType<MalusController>();
         multiplayerController = MultiplayerController.DefaultInstance;
+        gyroController = new GyroController();
     }
 
     void Update() {
         float accx = 0, accy = 0, accz = 0;
         
         if (Application.platform == RuntimePlatform.Android) { 
-            Vector3 acc = Input.acceleration;
+            Vector3 acc = gyroController.GetRelativeAcceleration();
             accx = acc.x;
             accz = acc.y;
         } else {
