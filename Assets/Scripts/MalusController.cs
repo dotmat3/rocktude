@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class MalusController : MonoBehaviour {
     public GameObject malusMessage;
     public GameObject ammoPrefab;
+    public AudioClip outOfAmmoSound;
 
     public float MALUS_PROB = 0.2f;
     public int N_TURRETS = 2;
@@ -17,7 +18,6 @@ public class MalusController : MonoBehaviour {
     
     private bool startMalus = false;
     private HashSet<string> disabledTurrets = new HashSet<string>();
-
 
     void Start() {
         gameController = FindObjectOfType<GameController>();
@@ -73,6 +73,7 @@ public class MalusController : MonoBehaviour {
     }
 
     public void DisableTurrets(List<string> turretsIds) {
+        AudioController.PlayOneShot(outOfAmmoSound, 3);
         Dictionary<string, Turret> turrets = gameController.GetTurrets();
         foreach (string id in turretsIds) {
             Turret turret = turrets[id];

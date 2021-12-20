@@ -13,6 +13,7 @@ public class Boss : Enemy {
     }
 
     public override void TakeDamage(int amount) {
+        AudioController.PlayOneShot(hitSound, 2);
         // The enemy is already dead, stop killing him!
         if (health <= 0)
             return;

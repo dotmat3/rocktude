@@ -40,8 +40,10 @@ public class GameController : MonoBehaviour {
     public int lives;
 
     [Header("Other")]
-    public GameObject gameOver;
     public GameObject victory;
+    public GameObject gameOver;
+    public AudioClip victorySound;
+    public AudioClip defeatSound;
 
     private GameStatus gameStatus = GameStatus.IDLE;
 
@@ -108,11 +110,13 @@ public class GameController : MonoBehaviour {
     public void Victory() {
         victory.SetActive(true);
         gameStatus = GameStatus.VICTORY;
+        AudioController.PlayOneShot(victorySound, 4);
     }
 
     public void Defeat() {
         gameOver.SetActive(true);
         gameStatus = GameStatus.GAME_OVER;
+        AudioController.PlayOneShot(defeatSound, 4);
     }
 
     public void AddOnMoneyUpdate(Action action) => onMoneyUpdate.Add(action);

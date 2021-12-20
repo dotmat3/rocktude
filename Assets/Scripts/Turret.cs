@@ -28,6 +28,8 @@ public class Turret : Purchasable {
 
     public Transform attackPoint;
     public ParticleSystem shootParticles;
+    public AudioClip shootSound;
+    public AudioClip reloadSound;
 
     private bool readyToShoot;
     private int enemiesMask, obstaclesMask;
@@ -157,6 +159,8 @@ public class Turret : Purchasable {
 
         shootParticles.Play();
 
+        AudioController.PlayOneShot(shootSound, 0);
+
         Invoke("ResetShot", timeBetweenShooting);
     }
 
@@ -223,5 +227,6 @@ public class Turret : Purchasable {
         Destroy(disabledEffectInstance);
         disabledEffectInstance = null;
         Activate();
+        AudioController.PlayOneShot(reloadSound, 3);
     }
 }

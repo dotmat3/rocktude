@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour {
     protected int initialHealth;
     public GameObject impactEffect;
 
+    public AudioClip hitSound;
+
     protected float distanceTravelled;
 
     protected GameController gameController;
@@ -61,6 +63,8 @@ public class Enemy : MonoBehaviour {
     }
 
     public virtual void TakeDamage(int amount) {
+        AudioController.PlayOneShot(hitSound, 2);
+
         // The enemy was already hit
         if (hit)
             return;

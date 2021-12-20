@@ -12,6 +12,8 @@ public class Missile : Purchasable {
     public float speed = 50f;
     public GameObject missileImpactEffect;
 
+    public AudioClip impactSound;
+
     private GameController gameController;
     private MultiplayerController multiplayerController;
 
@@ -55,6 +57,8 @@ public class Missile : Purchasable {
     }
 
     void OnCollisionEnter(Collision collision) {
+        AudioController.PlayOneShot(impactSound, 3);
+
         GameObject effect = Instantiate(missileImpactEffect, transform.position, Quaternion.identity);
         Destroy(effect, 2f);
 
