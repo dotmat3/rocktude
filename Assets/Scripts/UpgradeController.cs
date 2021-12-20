@@ -88,7 +88,7 @@ public class UpgradeController : MonoBehaviour {
         Destroy(turret.gameObject);
         gameController.RemoveTurret(turret);
 
-        AudioController.PlayOneShot(sellSound, 3);
+        AudioController.PlayOneShot(sellSound, 2);
     }
 
     public void UpgradeSelectedTurret() {
@@ -121,7 +121,7 @@ public class UpgradeController : MonoBehaviour {
 
         newTurret.Activate();
 
-        AudioController.PlayOneShot(upgradeSound, 3);
+        AudioController.PlayOneShot(upgradeSound, 2);
 
         return newTurret;
     }

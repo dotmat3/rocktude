@@ -25,6 +25,8 @@ public class MalusController : MonoBehaviour {
     }
 
     public void CheckMalus() {
+        if (gameController.GetGameStatus() != GameStatus.IDLE) return;
+
         int nTurrets = gameController.GetTurrets().Count;
         if (nTurrets == 0) return;
 
@@ -73,7 +75,7 @@ public class MalusController : MonoBehaviour {
     }
 
     public void DisableTurrets(List<string> turretsIds) {
-        AudioController.PlayOneShot(outOfAmmoSound, 3);
+        AudioController.PlayOneShot(outOfAmmoSound, 2);
         Dictionary<string, Turret> turrets = gameController.GetTurrets();
         foreach (string id in turretsIds) {
             Turret turret = turrets[id];

@@ -57,7 +57,7 @@ public class Missile : Purchasable {
     }
 
     void OnCollisionEnter(Collision collision) {
-        AudioController.PlayOneShot(impactSound, 3);
+        AudioController.PlayOneShot(impactSound, 2);
 
         GameObject effect = Instantiate(missileImpactEffect, transform.position, Quaternion.identity);
         Destroy(effect, 2f);

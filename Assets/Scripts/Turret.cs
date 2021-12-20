@@ -232,6 +232,6 @@ public class Turret : Purchasable {
     }
 
     public void PlayReloadSound() {
-        AudioController.PlayOneShot(reloadSound, 3);
+        AudioController.PlayOneShot(reloadSound, 2);
     }
 }

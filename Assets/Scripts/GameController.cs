@@ -110,13 +110,13 @@ public class GameController : MonoBehaviour {
     public void Victory() {
         victory.SetActive(true);
         gameStatus = GameStatus.VICTORY;
-        AudioController.PlayOneShot(victorySound, 4);
+        AudioController.PlayOneShot(victorySound, 3);
     }
 
     public void Defeat() {
         gameOver.SetActive(true);
         gameStatus = GameStatus.GAME_OVER;
-        AudioController.PlayOneShot(defeatSound, 4);
+        AudioController.PlayOneShot(defeatSound, 3);
     }
 
     public void AddOnMoneyUpdate(Action action) => onMoneyUpdate.Add(action);

@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public virtual void TakeDamage(int amount) {
-        AudioController.PlayOneShot(hitSound, 2);
+        AudioController.PlayOneShot(hitSound, 1);
 
         // The enemy was already hit
         if (hit)
