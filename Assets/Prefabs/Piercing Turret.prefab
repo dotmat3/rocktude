@@ -106,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1591110490357510, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
       propertyPath: m_Name
-      value: Turret2
+      value: Piercing Turret
       objectReference: {fileID: 0}
     - target: {fileID: 1591110490357510, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
       propertyPath: m_Layer
@@ -123,6 +123,38 @@ PrefabInstance:
     - target: {fileID: 1848291419924660, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459613001278838, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459613001278838, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4028418
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459613001278838, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.67152023
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459613001278838, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459613001278838, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459613001278838, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459613001278838, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459613001278838, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4924783946067484, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
       propertyPath: m_RootOrder
@@ -179,6 +211,11 @@ PrefabInstance:
     - target: {fileID: 4924783946067484, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199491464826902502, guid: d4af3966dba2cd746ab019083640eb8c,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
@@ -255,7 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 200
   description: 'Bigger is better :smirk:'
-  nextUpgrade: {fileID: 1395767886650740813, guid: eacfddc2ef3232e43922504fb2155974,
+  nextUpgrade: {fileID: 1851876755075269085, guid: eacfddc2ef3232e43922504fb2155974,
     type: 3}
 --- !u!114 &1695220613
 MonoBehaviour:
@@ -274,7 +311,7 @@ MonoBehaviour:
   defaultViewMaterial: {fileID: 2100000, guid: 33a1dafd5109da64cb80576675a568f7, type: 2}
   invalidViewMaterial: {fileID: 2100000, guid: 17bfa8edd66e9e946a8744528d91c626, type: 2}
   debug: 0
---- !u!114 &1695220614
+--- !u!114 &787553137051079190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,18 +320,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4214729066196790583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95bfb632382b37c43b31b2e2e64a46c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c6a55945fcf3b640aeba9a9b0bda676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cannon: {fileID: 4214504590974072879}
   cost: 200
   sellValue: 100
   type: 1
-  bullet: {fileID: 1099767012462384358, guid: a3d2a92cc5a893d49a3022aa83c19a50, type: 3}
-  radius: 5
-  shootForce: 20
+  bullet: {fileID: 1099767012462384358, guid: 8b2795ab697648940b96f7457075a0c5, type: 3}
+  radius: 10
+  shootForce: 10
   damage: 1
-  timeBetweenShooting: 1
+  timeBetweenShooting: 2
   attackPoint: {fileID: 4213032423677601181}
   shootParticles: {fileID: 4087208201111375441}
   shootSound: {fileID: 8300000, guid: c7d80816035426f4f84684fea8191a4a, type: 3}
@@ -303,3 +340,4 @@ MonoBehaviour:
     type: 3}
   index: 0
   playerId: 
+  piercing: 2

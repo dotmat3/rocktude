@@ -37,6 +37,17 @@ public class TurretPlacer : MonoBehaviour {
         terrainMask = LayerMask.GetMask("Terrain");
 
         gameController.AddOnMoneyUpdate(UpdatePurchasableButtons);
+        UpdatePurchasablesCosts();
+    }
+
+    public void UpdatePurchasablesCosts() {
+        for (int i = 0; i < buttons.Count; i++) {
+            int cost = purchasables[i].getCost();
+            string newText = "";
+            if (i == buttons.Count - 1) newText += "missile\n";
+            newText += "$" + cost;
+            buttons[i].GetComponentInChildren<Text>().text = newText;
+        }
     }
 
     void Update() {
