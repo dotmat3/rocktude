@@ -16,7 +16,7 @@ public class Missile : Purchasable {
 
     private GameController gameController;
     private MultiplayerController multiplayerController;
-    private GyroController gyroController;
+    private Rigidbody rb;
 
     private int enemyMask;
     private Vector3 forward;
@@ -25,7 +25,9 @@ public class Missile : Purchasable {
     void Start() {
         gameController = FindObjectOfType<GameController>();
         multiplayerController = MultiplayerController.DefaultInstance;
-        gyroController = new GyroController();
+        rb = GetComponent<Rigidbody>();
+
+        GyroController.Calibrate();
 
         enemyMask = LayerMask.GetMask("Enemy");
 
@@ -35,12 +37,12 @@ public class Missile : Purchasable {
 
     void FixedUpdate() {
         if (active) {
-            Vector3 acc = gyroController.GetRelativeAcceleration();
+            Vector3 acc = GyroController.GetRelativeAcceleration();
             forward = new Vector3(-acc.x, -1f, -acc.y);
 
             Vector3 direction = new Vector3(8f * forward.x, 4f * forward.y, 4f * forward.z);
             transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
-            GetComponent<Rigidbody>().velocity = direction * speed * Time.unscaledDeltaTime;
+            rb.velocity = direction * speed * Time.deltaTime / Time.timeScale;
         }
     }
 
