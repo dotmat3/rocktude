@@ -56,6 +56,7 @@ public class MalusController : MonoBehaviour {
         Dictionary<string, Turret> currentTurrets = gameController.GetTurrets();
         List<string> turretsIds = GenerateRandomKeys(currentTurrets, N_TURRETS);
         DisableTurrets(turretsIds);
+        GyroController.Calibrate();
         SpawnAmmo();
         multiplayerController.EnableMalus(turretsIds);
     }
@@ -95,11 +96,11 @@ public class MalusController : MonoBehaviour {
     }
 
     public void SpawnAmmo() {
-        if (disabledTurrets.Count == 0) {
-            AmmoCrate ammoCrate = FindObjectOfType<AmmoCrate>();
-            if (ammoCrate != null) Destroy(ammoCrate.gameObject);
-            return;
-        }
-        Instantiate(ammoPrefab);
+       Instantiate(ammoPrefab);
+    }
+
+    public void OnAmmoCrateHit() {
+        if (disabledTurrets.Count != 0)
+            Invoke("SpawnAmmo", 1f * Time.timeScale);
     }
 }

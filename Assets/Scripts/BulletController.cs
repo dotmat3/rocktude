@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour {
 
-    private GameController gameController;
-    private LeaderboardController leaderboardController;
+    protected GameController gameController;
+    protected LeaderboardController leaderboardController;
+    protected Turret turret;
 
     void Start() {
         gameController = FindObjectOfType<GameController>();
         leaderboardController = FindObjectOfType<LeaderboardController>();
     }
 
-    void OnTriggerEnter(Collider collider) {
+    protected virtual void OnTriggerEnter(Collider collider) {
         if (gameController.GetGameStatus() != GameStatus.IDLE)
             return;
 
@@ -20,15 +21,17 @@ public class BulletController : MonoBehaviour {
 
         if (collider.gameObject.tag == "Enemy") {
             Enemy enemy = collider.GetComponent<Enemy>();
-            enemy.TakeDamage(1);
+            enemy.TakeDamage(turret.damage);
 
-            leaderboardController.UpdateCollectedMoney(1);
+            leaderboardController.UpdateCollectedMoney(turret.damage);
 
-            gameController.UpdateMoney(gameController.money + 1);
+            gameController.UpdateMoney(gameController.money + turret.damage);
         }
     }
 
     void OnBecameInvisible() {
         Destroy(gameObject);
     }
+
+    public void SetTurret(Turret turret) => this.turret = turret;
 }

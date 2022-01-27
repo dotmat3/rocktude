@@ -57,6 +57,8 @@ public class GameController : MonoBehaviour {
     void Start() {
         multiplayerController = MultiplayerController.DefaultInstance;
 
+        GyroController.EnableGyro();
+
         UpdatePlayers();
         UpdateMoney(startMoney);
         UpdateLives(startLives);

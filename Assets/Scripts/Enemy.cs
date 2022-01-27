@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
     public float speed = 5f;
     public int health = 1;
     protected int initialHealth;
+    protected float initialSpeed;
     public GameObject impactEffect;
 
     public AudioClip hitSound;
@@ -37,6 +38,7 @@ public class Enemy : MonoBehaviour {
         lastPoint.y += height;
 
         initialHealth = health;
+        initialSpeed = speed;
     }
 
     void Update() {
@@ -96,4 +98,6 @@ public class Enemy : MonoBehaviour {
     public float GetDistanceTravelled() => distanceTravelled;
 
     public void SetDistanceTravelled(float newDist) => distanceTravelled = newDist;
+
+    public float GetInitialSpeed() => initialSpeed;
 }

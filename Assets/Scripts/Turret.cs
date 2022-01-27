@@ -23,7 +23,7 @@ public class Turret : Purchasable {
     public GameObject bullet;
     public float radius = 10f;
     public float shootForce = 10f;
-    public float damage = 1f;
+    public int damage = 1;
     public float timeBetweenShooting = 2f;
 
     public Transform attackPoint;
@@ -154,6 +154,7 @@ public class Turret : Purchasable {
 
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
         currentBullet.transform.forward = direction;
+        currentBullet.GetComponent<BulletController>().SetTurret(this);
 
         currentBullet.GetComponent<Rigidbody>().AddForce(direction * shootForce, ForceMode.Impulse);
 
