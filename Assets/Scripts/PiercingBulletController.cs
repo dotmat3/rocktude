@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PiercingBulletController : BulletController {
 
+    public ParticleSystem trail;
     private int hitCount;
 
     protected override void OnTriggerEnter(Collider collider) {
@@ -20,10 +21,19 @@ public class PiercingBulletController : BulletController {
 
             hitCount++;
             if (hitCount == (turret as PiercingTurret).piercing)
-                Destroy(gameObject);
+                destroyObject();
 
         } else {
-            Destroy(gameObject);
+            destroyObject();
         }
+    }
+
+    private void destroyObject() {
+        Destroy(gameObject);
+        ParticleSystem.MainModule mainModule = trail.main;
+        mainModule.loop = false;
+        Vector3 origScale = trail.transform.localScale;
+        trail.transform.parent = null;
+        trail.transform.localScale = origScale;
     }
 }

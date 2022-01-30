@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RocketBulletController : BulletController {
 
+    public ParticleSystem trail;
     public ParticleSystem explosionEffect;
 
     protected override void OnTriggerEnter(Collider collider) {
@@ -27,6 +28,15 @@ public class RocketBulletController : BulletController {
             }
         }
 
+        destroyObject();
+    }
+
+    private void destroyObject() {
         Destroy(gameObject);
+        ParticleSystem.MainModule mainModule = trail.main;
+        mainModule.loop = false;
+        Vector3 origScale = trail.transform.localScale;
+        trail.transform.parent = null;
+        trail.transform.localScale = origScale;
     }
 }

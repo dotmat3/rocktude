@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: timeBetweenShooting
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 7417028245106365877, guid: c7643d1fe94425746985ca86ca8ab039,
+        type: 3}
+      propertyPath: meshResolution
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 9014755112114301957, guid: c7643d1fe94425746985ca86ca8ab039,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -30,7 +35,7 @@ PrefabInstance:
     - target: {fileID: 9029522776793630253, guid: c7643d1fe94425746985ca86ca8ab039,
         type: 3}
       propertyPath: m_Name
-      value: Turret Upgrade 1
+      value: Normal Turret Upgrade 1
       objectReference: {fileID: 0}
     - target: {fileID: 9032450620881955251, guid: c7643d1fe94425746985ca86ca8ab039,
         type: 3}

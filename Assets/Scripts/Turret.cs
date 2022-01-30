@@ -158,7 +158,8 @@ public class Turret : Purchasable {
 
         currentBullet.GetComponent<Rigidbody>().AddForce(direction * shootForce, ForceMode.Impulse);
 
-        shootParticles.Play();
+        if (shootParticles)
+            shootParticles.Play();
 
         AudioController.PlayOneShot(shootSound, 0);
 
