@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class Turret : Purchasable {
 
@@ -58,20 +59,79 @@ public class Turret : Purchasable {
         if (!active) return;
 
         if (readyToShoot) {
-            Vector3? predictedEnemyPos = FindFirstEnemyPosition();
-            if (!predictedEnemyPos.HasValue) return;
+            List<Enemy> enemies = SortEnemiesByDistance();
 
-            // Rotate towards the predicted enemy position
-            Vector3 forward = predictedEnemyPos.Value - cannon.transform.position;
-            Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-            cannon.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, rotation.eulerAngles.z);
+            bool found = false;
+            Vector3 enemyPos = Vector3.zero;
 
-            Shoot(predictedEnemyPos.Value);
+            foreach (Enemy e in enemies) {
+                // If the enemy is behind an obstacle skip it,
+                // since the turrent cannot see it
+                if (!CanHitPos(e.transform.position)) continue;
+
+                enemyPos = FindBestShootingPos(e);
+
+                // If the best shooting position is behind an obstacle, ignore the enemy
+                if (!CanHitPos(enemyPos)) continue;
+
+                found = true;
+                break;
+            }
+
+            if (found) { 
+                Quaternion rotation = Quaternion.LookRotation((enemyPos - transform.position).normalized, Vector3.up);
+                cannon.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, rotation.eulerAngles.z);
+                Shoot(enemyPos); 
+            }
         }
     }
 
+    public bool CanHitPos(Vector3 position) {
+        Vector3 direction = (position - transform.position).normalized;
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, radius, obstaclesMask)) {
+            float distance = Vector3.Distance(position, transform.position);
+            if (hit.distance < distance) {
+                Debug.DrawLine(transform.position, position, Color.red);
+                return false;
+            }
+        }
+        Debug.DrawLine(transform.position, position, Color.green);
+        return true;
+    }
+
+
     public string GetIdentifier() {
         return playerId + "-" + index;
+    }
+
+    List<Enemy> SortEnemiesByDistance() {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, enemiesMask);
+        List<Enemy> enemies = new List<Enemy>();
+
+        foreach (Collider collider in hitColliders) {
+            Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+            enemies.Add(enemy);
+        }
+        enemies.Sort((e1, e2) => Math.Sign(e2.GetDistanceTravelled() - e1.GetDistanceTravelled()));
+        return enemies;
+    }
+
+    Vector3 FindBestShootingPos(Enemy enemy) {
+        float errorThreshold = 0.8f;
+        float error = Mathf.Infinity;
+
+        Vector3 enemyPos = enemy.transform.position;
+        Vector3 dir = Vector3.zero;
+
+        while (error > errorThreshold) {
+            dir = (enemyPos - transform.position).normalized;
+            float timeToReachEnemy = Vector3.Distance(transform.position, enemyPos) / shootForce;
+            float enemyNewDistance = enemy.GetDistanceTravelled() + enemy.speed * timeToReachEnemy;
+            Vector3 bulletPos = transform.position + timeToReachEnemy * shootForce * dir;
+            enemyPos = enemy.GetPositionAtDistance(enemyNewDistance);
+            error = Vector3.Distance(enemyPos, bulletPos);
+        }
+        return enemyPos;
     }
 
     Vector3? FindFirstEnemyPosition() {

@@ -476,7 +476,7 @@ MonoBehaviour:
   type: 3
   bullet: {fileID: 1099767012462384358, guid: 2420513dc8dbbc34490f77468ee7f1be, type: 3}
   radius: 5
-  shootForce: 5
+  shootForce: 8
   damage: 1
   timeBetweenShooting: 2
   attackPoint: {fileID: 9032338974884441253}
