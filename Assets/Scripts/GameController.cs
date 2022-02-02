@@ -55,6 +55,9 @@ public class GameController : MonoBehaviour {
     private float timeScale = 1f;
 
     void Start() {
+        // Disable screen sleep
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
         multiplayerController = MultiplayerController.DefaultInstance;
 
         GyroController.EnableGyro();
