@@ -119,6 +119,8 @@ public class GameController : MonoBehaviour {
     }
 
     public void Defeat() {
+        if (gameStatus == GameStatus.GAME_OVER) return;
+
         gameOver.SetActive(true);
         gameStatus = GameStatus.GAME_OVER;
         AudioController.PlayOneShot(defeatSound, 3);
