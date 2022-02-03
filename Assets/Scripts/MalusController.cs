@@ -12,6 +12,7 @@ public class MalusController : MonoBehaviour {
 
     public float MALUS_PROB = 0.2f;
     public int N_TURRETS = 2;
+    public float AMMO_INTERVAL_S = 1f;
 
     private GameController gameController;
     private MultiplayerController multiplayerController;
@@ -101,6 +102,6 @@ public class MalusController : MonoBehaviour {
 
     public void OnAmmoCrateHit() {
         if (disabledTurrets.Count != 0)
-            Invoke("SpawnAmmo", 1f * Time.timeScale);
+            Invoke("SpawnAmmo", AMMO_INTERVAL_S * Time.timeScale);
     }
 }
