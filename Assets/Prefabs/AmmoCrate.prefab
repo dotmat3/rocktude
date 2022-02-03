@@ -1129,8 +1129,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0546187, y: 0.9792795, z: 1.8855404}
-  m_Center: {x: -0.0065001845, y: 0.5440812, z: 0.09260398}
+  m_Size: {x: 1.7592956, y: 0.9792795, z: 2.5649302}
+  m_Center: {x: -0.0065001845, y: 0.5440812, z: 0.092603974}
 --- !u!114 &-3873051878297194480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,7 +1145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalSpeed: 40
   verticalSpeed: 20
-  gravitySpeed: 10
+  gravitySpeed: 8
 --- !u!54 &-4638377351364514339
 Rigidbody:
   m_ObjectHideFlags: 0
