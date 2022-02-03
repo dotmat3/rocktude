@@ -75,7 +75,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3315096, guid: 63413d090c6496749a181c790e2b14d3, type: 3}
+    - {fileID: 2365686, guid: 63413d090c6496749a181c790e2b14d3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 63413d090c6496749a181c790e2b14d3, type: 3}
 --- !u!1 &6928906771685823986 stripped
 GameObject:
@@ -112,6 +114,56 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3.012225
   m_Center: {x: 0.06777036, y: 0, z: -0.03905189}
+--- !u!23 &1744448706224228205
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928906771685823986}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 17df8f83ab4584df5be996814e52a40c, type: 2}
+  - {fileID: 2100000, guid: 2e15a8120850038419653ed0a99e14c9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &9171083152406816593
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928906771685823986}
+  m_Mesh: {fileID: 4223735051045844818, guid: 70f0be4203ad45e49bf861f5ebfd4a93, type: 3}
 --- !u!114 &4218611715543721684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endOfPathInstruction: 2
   speed: 5
-  health: 4
+  health: 3
   impactEffect: {fileID: 214270318505080964, guid: b3655805f67d02b4aa97093db01db87e,
     type: 3}
   hitSound: {fileID: 8300000, guid: 65576a86fae894f4b9d71b3394ade5c6, type: 3}

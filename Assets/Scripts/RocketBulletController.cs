@@ -16,7 +16,7 @@ public class RocketBulletController : BulletController {
             RocketTurret rocketTurret = turret as RocketTurret;
             ParticleSystem.ShapeModule shape = explosionEffect.shape;
             shape.radius = rocketTurret.area;
-            ParticleSystem explosion = Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
+            Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
 
             int enemyMask = LayerMask.GetMask("Enemy");
             Collider[] hittedEnemies = Physics.OverlapSphere(transform.position, rocketTurret.area, enemyMask);
@@ -28,15 +28,15 @@ public class RocketBulletController : BulletController {
             }
         }
 
-        destroyObject();
+        DestroyObject();
     }
 
-    private void destroyObject() {
-        Destroy(gameObject);
+    private void DestroyObject() {
         ParticleSystem.MainModule mainModule = trail.main;
         mainModule.loop = false;
         Vector3 origScale = trail.transform.localScale;
         trail.transform.parent = null;
         trail.transform.localScale = origScale;
+        Destroy(gameObject);
     }
 }

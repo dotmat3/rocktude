@@ -75,7 +75,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2319090, guid: 55d2170943c24424fb8400963479a14f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3379812, guid: 55d2170943c24424fb8400963479a14f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4223735051045844818, guid: 70f0be4203ad45e49bf861f5ebfd4a93,
+        type: 3}
+    m_RemovedComponents:
+    - {fileID: 3379812, guid: 55d2170943c24424fb8400963479a14f, type: 3}
+    - {fileID: 2319090, guid: 55d2170943c24424fb8400963479a14f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 55d2170943c24424fb8400963479a14f, type: 3}
 --- !u!1 &5353895784821570019 stripped
 GameObject:
@@ -112,6 +123,56 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3.012225
   m_Center: {x: 0.06777036, y: 0, z: -0.03905189}
+--- !u!33 &5268440695345886032
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5353895784821570019}
+  m_Mesh: {fileID: 4223735051045844818, guid: 70f0be4203ad45e49bf861f5ebfd4a93, type: 3}
+--- !u!23 &6602836334848772317
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5353895784821570019}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 71bf2bc9be6334274b71c399f0a3ecb2, type: 2}
+  - {fileID: 2100000, guid: 2e15a8120850038419653ed0a99e14c9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4098465186537424826
 MonoBehaviour:
   m_ObjectHideFlags: 0

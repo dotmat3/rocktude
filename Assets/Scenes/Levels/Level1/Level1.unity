@@ -2414,8 +2414,8 @@ MonoBehaviour:
   enemies:
   - {fileID: 4098465186537424826, guid: 60f18ceaa1fbf2d459937f2589cf3aa5, type: 3}
   - {fileID: 6373818661807911902, guid: a5ee0065bd6a0d446bf6c503393a965e, type: 3}
-  - {fileID: 1844523752, guid: 48ee25447b83d694b8363ee0a45e3106, type: 3}
   - {fileID: 4218611715543721684, guid: d084bc0d93886b445b8adbbf7b553cbf, type: 3}
+  - {fileID: 1844523752, guid: 48ee25447b83d694b8363ee0a45e3106, type: 3}
   boss: {fileID: -7235198779844759424, guid: 873ce52063653df4fafb4095653465fa, type: 3}
   startButton: {fileID: 1586070192}
 --- !u!114 &579490852

@@ -10,6 +10,10 @@ public class SlowingBulletController : BulletController {
 
         if (collider.gameObject.tag == "Enemy") {
             Enemy enemy = collider.GetComponent<Enemy>();
+            enemy.TakeDamage(turret.damage);
+            leaderboardController.UpdateCollectedMoney(turret.damage);
+            gameController.UpdateMoney(gameController.money + turret.damage);
+
             // Prevent double slowness
             if (enemy.speed == enemy.GetInitialSpeed()) {
                 gameController.StartCoroutine(SlowEnemy(enemy));

@@ -26,11 +26,13 @@ public class Enemy : MonoBehaviour {
 
     protected bool hit = false;
 
-    public virtual void Start() {
+    public void Awake() {
         gameController = FindObjectOfType<GameController>();
         waveController = FindObjectOfType<WaveController>();
         leaderboardController = FindObjectOfType<LeaderboardController>();
+    }
 
+    public virtual void Start() {
         height = GetComponent<MeshRenderer>().bounds.size.y;
 
         pathCreator = gameController.pathLevel;
@@ -72,7 +74,6 @@ public class Enemy : MonoBehaviour {
             return;
         
         hit = true;
-        Destroy(gameObject);
 
         // The enemy is already dead, stop killing him!
         if (health <= 0)
@@ -88,6 +89,8 @@ public class Enemy : MonoBehaviour {
             OnKill();
         else
             waveController.SpawnPreviousTier(this);
+
+        Destroy(gameObject);
     }
 
     public void OnKill() {
