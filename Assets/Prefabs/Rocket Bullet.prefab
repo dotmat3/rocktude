@@ -4892,3 +4892,4 @@ MonoBehaviour:
   trail: {fileID: 7338244095934332616}
   explosionEffect: {fileID: 6601217656281576947, guid: eeb3eece2e8ced641aa3c5cffb14482a,
     type: 3}
+  explosionSound: {fileID: 8300000, guid: add77589c2e6caa419fa479a646c9b63, type: 3}

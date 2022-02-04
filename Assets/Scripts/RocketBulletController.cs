@@ -6,12 +6,13 @@ public class RocketBulletController : BulletController {
 
     public ParticleSystem trail;
     public ParticleSystem explosionEffect;
+    public AudioClip explosionSound;
 
     protected override void OnTriggerEnter(Collider collider) {
         if (gameController.GetGameStatus() != GameStatus.IDLE)
             return;
 
-
+        AudioController.PlayOneShot(explosionSound, 0);
         if (collider.gameObject.tag == "Enemy") {
             RocketTurret rocketTurret = turret as RocketTurret;
             ParticleSystem.ShapeModule shape = explosionEffect.shape;

@@ -381,7 +381,7 @@ MonoBehaviour:
   timeBetweenShooting: 2
   attackPoint: {fileID: 2966026993088181846}
   shootParticles: {fileID: 0}
-  shootSound: {fileID: 8300000, guid: c7d80816035426f4f84684fea8191a4a, type: 3}
+  shootSound: {fileID: 8300000, guid: eae0a2cbd095d8345befcf3a20f62842, type: 3}
   reloadSound: {fileID: 8300000, guid: 27c3b06abf4ed554b8f259a655810a81, type: 3}
   disabledEffectPrefab: {fileID: 1551312629276147685, guid: 6d6cf938ffb7fdf4fbc5e705df7f34bd,
     type: 3}
