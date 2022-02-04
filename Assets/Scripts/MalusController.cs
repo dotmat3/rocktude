@@ -101,7 +101,7 @@ public class MalusController : MonoBehaviour {
     }
 
     public void OnAmmoCrateHit() {
-        if (disabledTurrets.Count != 0)
+        if (disabledTurrets.Count != 0 && gameController.GetGameStatus() == GameStatus.IDLE)
             Invoke("SpawnAmmo", AMMO_INTERVAL_S * Time.timeScale);
     }
 }
