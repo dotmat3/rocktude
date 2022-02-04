@@ -8,9 +8,9 @@ public class StartButtonBehaviour : MonoBehaviour {
     }
 
     private StartButtonStatus status = StartButtonStatus.Start;
-    public Sprite startSprite;
-    public Sprite autoRoundSprite;
-    public Sprite enabledAutoRoundSprite;
+    public Color startColor;
+    public Color autoRoundColor;
+    public Color enabledAutoRoundColor;
     public WaveController waveController;
 
     private void Start() {
@@ -36,22 +36,32 @@ public class StartButtonBehaviour : MonoBehaviour {
 
     public void ShowStartRound() {
         status = StartButtonStatus.Start;
-        GetComponent<Image>().sprite = startSprite;
+        ChangeButtonColor(startColor);
+        GetComponentInChildren<Text>().text = "Start";
     }
 
     void ShowEnableAutoRound() {
         status = StartButtonStatus.AutoRound;
-        GetComponent<Image>().sprite = autoRoundSprite;
+        ChangeButtonColor(autoRoundColor);
+        GetComponentInChildren<Text>().text = "Auto Start";
     }
 
     void EnableAutoRound() {
         status = StartButtonStatus.AutoRoundEnabled;
-        GetComponent<Image>().sprite = enabledAutoRoundSprite;
+        ChangeButtonColor(enabledAutoRoundColor);
+        GetComponentInChildren<Text>().text = "Auto Start";
         waveController.EnableAutoRound();
     }
 
     void DisableAutoRound() {
         ShowEnableAutoRound();
         waveController.DisableAutoRound();
+    }
+
+    private void ChangeButtonColor(Color color) {
+        ColorBlock colors = GetComponent<Button>().colors;
+        colors.normalColor = color;
+        colors.selectedColor = color;
+        GetComponent<Button>().colors = colors;
     }
 }

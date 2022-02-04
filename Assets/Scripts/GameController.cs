@@ -187,11 +187,16 @@ public class GameController : MonoBehaviour {
 
     public void ToggleSpeedUpTime() {
         if (timeScale == 1) {
-            speedUpButton.GetComponent<Image>().color = Color.green;
+            ColorBlock colors = speedUpButton.GetComponent<Button>().colors;
+            colors.normalColor = new Color(0.53f, 0.91f, 0.51f);
+            colors.selectedColor = new Color(0.53f, 0.91f, 0.51f);
+            speedUpButton.GetComponent<Button>().colors = colors;
             Time.timeScale = timeScale = 2;
-        }
-        else {
-            speedUpButton.GetComponent<Image>().color = Color.white;
+        } else {
+            ColorBlock colors = speedUpButton.GetComponent<Button>().colors;
+            colors.normalColor = new Color(0.79f, 0.79f, 0.79f);
+            colors.selectedColor = new Color(0.79f, 0.79f, 0.79f);
+            speedUpButton.GetComponent<Button>().colors = colors;
             Time.timeScale = timeScale = 1;
         }
     }
