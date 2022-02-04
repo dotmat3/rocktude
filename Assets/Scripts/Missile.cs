@@ -37,8 +37,20 @@ public class Missile : Purchasable {
 
     void FixedUpdate() {
         if (active) {
-            Vector3 acc = GyroController.GetRelativeAcceleration();
-            forward = new Vector3(-acc.x, -1f, -acc.y);
+            float accx = 0, accz = 0;
+
+            if (Application.platform == RuntimePlatform.Android) {
+                Vector3 acc = GyroController.GetRelativeAcceleration();
+                accx = acc.x;
+                accz = acc.y;
+            } else {
+                if (Input.GetKey(KeyCode.A)) accx = 0.5f;
+                if (Input.GetKey(KeyCode.D)) accx = -0.5f;
+                if (Input.GetKey(KeyCode.S)) accz = 0.5f;
+                if (Input.GetKey(KeyCode.W)) accz = -0.5f;
+            }
+
+            forward = new Vector3(-accx, -1f, -accz);
 
             Vector3 direction = new Vector3(8f * forward.x, 4f * forward.y, 4f * forward.z);
             transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
@@ -59,16 +71,24 @@ public class Missile : Purchasable {
     }
 
     void OnCollisionEnter(Collision collision) {
+        StartCoroutine(HandleCollision());
+    }
+
+    private IEnumerator HandleCollision() {
+        GetComponentInChildren<MeshRenderer>().enabled = false;
         AudioController.PlayOneShot(impactSound, 2);
 
-        GameObject effect = Instantiate(missileImpactEffect, transform.position, Quaternion.identity);
-        Destroy(effect, 2f);
+        Instantiate(missileImpactEffect, transform.position, Quaternion.identity);
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, enemyMask);
+        for (int i = 1; i < radius; i++) {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, i, enemyMask);
 
-        foreach (Collider collider in colliders) {
-            Enemy enemy = collider.GetComponent<Enemy>();
-            enemy.TakeDamage(damage);
+            foreach (Collider collider in colliders) {
+                Enemy enemy = collider.GetComponent<Enemy>();
+                enemy.TakeDamage(damage);
+            }
+
+            yield return new WaitForSeconds(0.1f);
         }
 
         gameController.ShowDrawer();

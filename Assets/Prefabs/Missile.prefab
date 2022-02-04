@@ -9568,10 +9568,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 200
-  cost: 500
-  radius: 4
-  damage: 2
-  speed: 50
+  cost: 700
+  radius: 7
+  damage: 10
+  speed: 70
   missileImpactEffect: {fileID: 7083821594506842035, guid: c7fb25bb5ac726c4faa2998347ba6abd,
     type: 3}
   impactSound: {fileID: 8300000, guid: 3b898452ace4a35488a94d56d1d9c651, type: 3}
@@ -9741,6 +9741,11 @@ PrefabInstance:
     - target: {fileID: 4719232677619670, guid: 24baf2ca3b369a64b999258f8731be6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23003849656990474, guid: 24baf2ca3b369a64b999258f8731be6d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24baf2ca3b369a64b999258f8731be6d, type: 3}

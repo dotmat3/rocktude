@@ -611,7 +611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 811, y: -416.5}
+  m_AnchoredPosition: {x: 817, y: -416.5}
   m_SizeDelta: {x: 213.9607, y: 375.002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &110041387
@@ -2037,7 +2037,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'MISSILE
 
-    $500'
+    $700'
 --- !u!222 &529207593
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2404,7 +2404,7 @@ MonoBehaviour:
   playersUI: {fileID: 1169965975}
   speedUpButton: {fileID: 1186106935}
   backPopup: {fileID: 1316353979}
-  round: 1
+  round: 39
   maxRound: 40
   roundText: {fileID: 745870042}
   startMoney: 6000
@@ -5355,7 +5355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 545, y: -411.78}
+  m_AnchoredPosition: {x: 554, y: -416.49997}
   m_SizeDelta: {x: 213.9607, y: 375.002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1186106937

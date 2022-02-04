@@ -110,12 +110,14 @@ public class UpgradeController : MonoBehaviour {
             return null;
 
         Transform prevTransform = turret.transform;
+        Transform cannonTransform = turret.cannon.transform;
         NextUpgradeInfo info = turret.GetComponent<NextUpgradeInfo>();
         Destroy(turret.gameObject);
 
         Turret newTurret = Instantiate(info.nextUpgrade, prevTransform.position, prevTransform.rotation);
         newTurret.index = turret.index;
         newTurret.playerId = turret.playerId;
+        newTurret.cannon.transform.rotation = cannonTransform.rotation;
 
         gameController.StoreTurret(newTurret);
 
