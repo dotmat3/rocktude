@@ -30,6 +30,7 @@ public class Boss : Enemy {
         }
 
         // Shrink the boss size
-        gameObject.transform.localScale = (float) health / initialHealth * initialScale;
+        float newScale = Mathf.Max(0.02f, (float)health / initialHealth * initialScale.x);
+        gameObject.transform.localScale = newScale * Vector3.one;
     }
 }
