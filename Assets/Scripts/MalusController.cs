@@ -58,6 +58,7 @@ public class MalusController : MonoBehaviour {
         List<string> turretsIds = GenerateRandomKeys(currentTurrets, N_TURRETS);
         DisableTurrets(turretsIds);
         GyroController.Calibrate();
+        gameController.GetComponent<TurretPlacer>().SetMissilePurchasable(false);
         SpawnAmmo();
         multiplayerController.EnableMalus(turretsIds);
     }
@@ -94,6 +95,8 @@ public class MalusController : MonoBehaviour {
     public void EnableTurret(Turret turret) {
         turret.DisableMalus();
         disabledTurrets.Remove(turret.GetIdentifier());
+        if (disabledTurrets.Count == 0)
+            gameController.GetComponent<TurretPlacer>().SetMissilePurchasable(true);
     }
 
     public void SpawnAmmo() {

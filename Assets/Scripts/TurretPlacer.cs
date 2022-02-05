@@ -27,6 +27,8 @@ public class TurretPlacer : MonoBehaviour {
     private int buyingTurretIndex = -1;
     private int turretCost = -1;
     private int numTurretsPlaced = 0;
+    
+    private bool missileButtonPurchasable = true;
 
     private FirebaseAuth auth;
 
@@ -89,10 +91,17 @@ public class TurretPlacer : MonoBehaviour {
         buttons[turretIndex].GetComponentInChildren<Text>().text = "cancel";
     }
 
+    public void SetMissilePurchasable(bool status) {
+        missileButtonPurchasable = status;
+        UpdatePurchasableButtons();
+    }
+
     void UpdatePurchasableButtons() {
         for (int i = 0; i < buttons.Count; i++) {
             int cost = purchasables[i].getCost();
             buttons[i].interactable = cost <= gameController.money;
+            if (i == buttons.Count - 1 && !missileButtonPurchasable)
+                buttons[i].interactable = false;
         }
     }
 
