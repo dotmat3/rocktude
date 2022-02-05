@@ -6,6 +6,7 @@ public class AmmoCrate : MonoBehaviour {
     public float horizontalSpeed = 10f;
     public float verticalSpeed = 10f;
     public float gravitySpeed = 10f;
+    public ParticleSystem hitEffect;
 
     private MalusController malusController;
     private MultiplayerController multiplayerController;
@@ -51,6 +52,7 @@ public class AmmoCrate : MonoBehaviour {
     private void OnCollisionEnter(Collision collision) {
         // Colliding with the terrain
         hitSomething = true;
+        Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
     }
 
     private void OnTriggerEnter(Collider collider) {
@@ -62,5 +64,7 @@ public class AmmoCrate : MonoBehaviour {
             malusController.EnableTurret(turret);
             multiplayerController.DisableMalus(turret.GetIdentifier());
         }
+
+        Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
     }
 }

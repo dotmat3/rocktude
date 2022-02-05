@@ -1146,6 +1146,8 @@ MonoBehaviour:
   horizontalSpeed: 40
   verticalSpeed: 20
   gravitySpeed: 8
+  hitEffect: {fileID: 665627853707562847, guid: f487e5700c5198b45abaa91de28a3c79,
+    type: 3}
 --- !u!54 &-4638377351364514339
 Rigidbody:
   m_ObjectHideFlags: 0
