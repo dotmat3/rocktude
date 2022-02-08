@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17618737, g: 0.22050484, b: 0.30282965, a: 1}
+  m_IndirectSpecularColor: {r: 0.17618771, g: 0.22050393, b: 0.30282912, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3094,7 +3094,7 @@ MonoBehaviour:
   playersUI: {fileID: 1169965975}
   speedUpButton: {fileID: 1186106935}
   backPopup: {fileID: 1316353979}
-  round: 40
+  round: 1
   maxRound: 40
   roundText: {fileID: 745870042}
   startMoney: 6000
