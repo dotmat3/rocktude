@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -340,7 +340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 548.75543, y: -55.208}
+  m_AnchoredPosition: {x: 548.75543, y: -53.205}
   m_SizeDelta: {x: 1099.7, y: 106.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &124818854
@@ -1176,7 +1176,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 548.75543, y: -266.425}
+  m_AnchoredPosition: {x: 548.75543, y: -256.41}
   m_SizeDelta: {x: 937.5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &562665580
@@ -3053,7 +3053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 548.75543, y: -474.43695}
+  m_AnchoredPosition: {x: 548.75543, y: -456.41}
   m_SizeDelta: {x: 937.5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1037710972
@@ -3620,6 +3620,7 @@ MonoBehaviour:
   playersDropdown: {fileID: 693052004}
   waitRoomUI: {fileID: 1816584994}
   roomName: {fileID: 1753449442}
+  mapIndex: {fileID: 1699545467}
   QRCode: {fileID: 906096884}
   roomCode: {fileID: 731317029}
   waitingPlayers:
@@ -3836,7 +3837,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 548.75543, y: -162.419}
+  m_AnchoredPosition: {x: 548.75543, y: -156.41}
   m_SizeDelta: {x: 937.5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1285197532
@@ -4753,7 +4754,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 20
+  m_CharacterLimit: 15
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -5591,7 +5592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 548.75543, y: -370.43097}
+  m_AnchoredPosition: {x: 548.75543, y: -356.41}
   m_SizeDelta: {x: 937.5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1665407084
@@ -5710,6 +5711,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678008383}
+  m_CullTransparentMesh: 1
+--- !u!1 &1699545465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1699545466}
+  - component: {fileID: 1699545468}
+  - component: {fileID: 1699545467}
+  m_Layer: 5
+  m_Name: Map Index
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1699545466
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699545465}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1816584995}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1552, y: -329.03}
+  m_SizeDelta: {x: 562.54, y: 129.07}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1699545467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699545465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_FontSize: 95
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 147
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: MAP 1
+--- !u!222 &1699545468
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699545465}
   m_CullTransparentMesh: 1
 --- !u!1 &1752775983
 GameObject:
@@ -5890,8 +5970,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960.6, y: -329.03003}
-  m_SizeDelta: {x: 1633.9524, y: 129.06}
+  m_AnchoredPosition: {x: 626.95, y: -329.03}
+  m_SizeDelta: {x: 1071.417, y: 129.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1753449442
 MonoBehaviour:
@@ -5915,18 +5995,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
-    m_FontSize: 120
+    m_FontSize: 95
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 130
-    m_Alignment: 4
+    m_MaxSize: 147
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'NAME: 01234567890123456789'
+  m_Text: 'NAME: 0123456789012345'
 --- !u!222 &1753449443
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6335,6 +6415,7 @@ RectTransform:
   - {fileID: 1177617326}
   - {fileID: 2069311249}
   - {fileID: 1918958586}
+  - {fileID: 1699545466}
   m_Father: {fileID: 1261716893}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

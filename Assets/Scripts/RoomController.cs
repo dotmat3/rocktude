@@ -45,6 +45,7 @@ public class RoomController : MonoBehaviour {
     [Header("Waiting Room")]
     public GameObject waitRoomUI;
     public Text roomName;
+    public Text mapIndex;
     public RawImage QRCode;
     public Text roomCode;
     public List<GameObject> waitingPlayers;
@@ -106,6 +107,7 @@ public class RoomController : MonoBehaviour {
                 waitingPlayers[i].SetActive(false);
 
         roomName.text = "Name: " + roomInfo.name;
+        mapIndex.text = "Map " + (roomInfo.map + 1);
         roomCode.text = "Code: " + roomInfo.code;
 
         string QRData = JsonUtility.ToJson(roomInfo);
@@ -138,8 +140,9 @@ public class RoomController : MonoBehaviour {
     private void ResetWaitingRoom() {
         roomInfo = null;
 
-        roomName.text = "Name: ";
-        roomCode.text = "Code: ";
+        roomName.text = "Name: -";
+        mapIndex.text = "Map -";
+        roomCode.text = "Code: -";
 
         QRCode.texture = Texture2D.whiteTexture;
 
