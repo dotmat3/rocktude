@@ -20,6 +20,8 @@ public class MalusController : MonoBehaviour {
     private bool startMalus = false;
     private HashSet<string> disabledTurrets = new HashSet<string>();
 
+    private bool malusLastRound = false;
+
     void Start() {
         gameController = FindObjectOfType<GameController>();
         multiplayerController = MultiplayerController.DefaultInstance;
@@ -27,6 +29,13 @@ public class MalusController : MonoBehaviour {
 
     public void CheckMalus() {
         if (gameController.GetGameStatus() != GameStatus.IDLE) return;
+
+        if (malusLastRound) {
+            malusLastRound = false;
+            return;
+        }
+
+        malusLastRound = true;
 
         int nTurrets = gameController.GetTurrets().Count;
         if (nTurrets == 0) return;
