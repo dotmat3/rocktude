@@ -88,6 +88,11 @@ public class WaveController : MonoBehaviour {
         Enemy prefab = enemies[enemy.health - 1];
         Enemy newEnemy = Instantiate(prefab, enemy.transform.position, enemy.transform.rotation);
         newEnemy.SetDistanceTravelled(enemy.GetDistanceTravelled());
+        
+        newEnemy.beginSlowTime = enemy.beginSlowTime;
+        newEnemy.slowDuration = enemy.slowDuration;
+        newEnemy.speed = enemy.speed;
+
         return newEnemy;
     }
 

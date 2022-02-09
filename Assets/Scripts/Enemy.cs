@@ -26,10 +26,16 @@ public class Enemy : MonoBehaviour {
 
     protected bool hit = false;
 
+    public float beginSlowTime = -1;
+    public float slowDuration;
+
     public void Awake() {
         gameController = FindObjectOfType<GameController>();
         waveController = FindObjectOfType<WaveController>();
         leaderboardController = FindObjectOfType<LeaderboardController>();
+
+        initialHealth = health;
+        initialSpeed = speed;
     }
 
     public virtual void Start() {
@@ -38,9 +44,6 @@ public class Enemy : MonoBehaviour {
         pathCreator = gameController.pathLevel;
         lastPoint = pathCreator.path.GetPoint(pathCreator.path.NumPoints - 1);
         lastPoint.y += height;
-
-        initialHealth = health;
-        initialSpeed = speed;
     }
 
     void Update() {
@@ -57,7 +60,20 @@ public class Enemy : MonoBehaviour {
                 waveController.EnemyRemoved();
                 Destroy(gameObject);
             }
+
+            if (beginSlowTime != -1 && (Time.time - beginSlowTime) >= (slowDuration * Time.timeScale)) {
+                beginSlowTime = -1;
+                speed = initialSpeed;
+            }
         }
+    }
+
+    public void SlowDown(float slowness, float slowDuration) {
+        beginSlowTime = Time.time;
+        this.slowDuration = slowDuration;
+
+        float newSpeed = Mathf.Max(1, initialSpeed - slowness);
+        speed = newSpeed < speed ? newSpeed : speed;
     }
 
     public Vector3 GetPositionAtDistance(float distance) {
@@ -69,8 +85,8 @@ public class Enemy : MonoBehaviour {
     public virtual void TakeDamage(int amount) {
         AudioController.PlayOneShot(hitSound, 1);
 
-        // The enemy was already hit
-        if (hit)
+        // The enemy doesn't take damage
+        if (hit || amount == 0)
             return;
         
         hit = true;
@@ -88,7 +104,7 @@ public class Enemy : MonoBehaviour {
         if (health <= 0)
             OnKill();
         else
-            waveController.SpawnPreviousTier(this);
+           waveController.SpawnPreviousTier(this);
 
         Destroy(gameObject);
     }
