@@ -22,6 +22,8 @@ public class Missile : Purchasable {
     private Vector3 forward;
     private bool active = true;
 
+    private bool exploded = false;
+
     void Start() {
         gameController = FindObjectOfType<GameController>();
         multiplayerController = MultiplayerController.DefaultInstance;
@@ -71,6 +73,9 @@ public class Missile : Purchasable {
     }
 
     void OnCollisionEnter(Collision collision) {
+        if (exploded) return;
+        
+        exploded = true;
         StartCoroutine(HandleCollision());
     }
 
